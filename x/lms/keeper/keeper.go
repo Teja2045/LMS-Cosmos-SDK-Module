@@ -25,18 +25,12 @@ func NewKeeper(key storetypes.StoreKey,
 	}
 }
 
-func (k Keeper) AdminRegister(ctx sdk.Context, req *types.MsgRegisterAdminRequest) error {
-	if _, err := sdk.AccAddressFromBech32(req.Address); err != nil {
-		return err
-	}
-	store := ctx.KVStore(k.storeKey)
-	bz, err := k.cdc.Marshal(req)
-	if err != nil {
-		return err
-	} else {
-		store.Set(types.AdminKey, bz)
-	}
-	return nil
+func (k Keeper) GetCodec() codec.BinaryCodec {
+	return k.cdc
+}
+
+func (k Keeper) GetStoreKey() storetypes.StoreKey {
+	return k.storeKey
 }
 
 func (k Keeper) AcceptLeave(ctx sdk.Context, req *types.MsgAcceptLeaveRequest) error {
@@ -46,11 +40,11 @@ func (k Keeper) AcceptLeave(ctx sdk.Context, req *types.MsgAcceptLeaveRequest) e
 	store := ctx.KVStore(k.storeKey)
 
 	req.Status = types.LeaveStatus_STATUS_ACCEPTED
-	bz, err := k.cdc.Marshal(req)
+	val, err := k.cdc.Marshal(req)
 	if err != nil {
 		return err
 	} else {
-		store.Set(types.LeaveKey, bz)
+		store.Set(types.LeaveKey, val)
 	}
 	return nil
 }

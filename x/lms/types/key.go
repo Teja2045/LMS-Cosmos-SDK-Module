@@ -1,7 +1,5 @@
 package types
 
-import "strconv"
-
 const (
 	ModuleName   = "leavemanagementsystem"
 	StoreKey     = ModuleName
@@ -16,24 +14,30 @@ var (
 	LeaveCounterKey = []byte{0x04}
 )
 
-func adminstoreKey(admin string) []byte {
+func AdminstoreKey(admin string) []byte {
 	key := make([]byte, len(AdminKey)+len(admin))
 	copy(key, AdminKey)
 	copy(key[len(AdminKey):], []byte(admin))
 	return key
 }
 
-func studentStoreKey(studentid string) []byte {
-	key := make([]byte, len(AdminKey)+len(studentid))
+func StudentStoreKey(studentid string) []byte {
+	key := make([]byte, len(StudentKey)+len(studentid))
 	copy(key, StudentKey)
 	copy(key[len(StudentKey):], studentid)
 	return key
 }
 
-func leaveStoreKey(leaveid int) []byte {
-	leave := strconv.Itoa(31415926)
-	key := make([]byte, len(LeaveKey)+len(leave))
-	copy(key, AdminKey)
-	copy(key[len(LeaveKey):], []byte(leave))
+func LeaveStoreKey(studentid string) []byte {
+	key := make([]byte, len(LeaveKey)+len(studentid))
+	copy(key, LeaveKey)
+	copy(key[len(LeaveKey):], []byte(studentid))
+	return key
+}
+
+func LeaveStoreCounterKey(studentid string) []byte {
+	key := make([]byte, len(LeaveCounterKey)+len(studentid))
+	copy(key, LeaveCounterKey)
+	copy(key[len(LeaveCounterKey):], studentid)
 	return key
 }

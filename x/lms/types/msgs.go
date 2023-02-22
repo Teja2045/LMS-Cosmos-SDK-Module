@@ -64,9 +64,12 @@ func (msg MsgApplyLeaveRequest) GetSigners() []sdk.AccAddress {
 
 //_________________________________________________________________________________________
 
-func NewMsgRegisterAdminRequest() *MsgRegisterAdminRequest {
+func NewMsgRegisterAdminRequest(name string, address string) *MsgRegisterAdminRequest {
 
-	return &MsgRegisterAdminRequest{}
+	return &MsgRegisterAdminRequest{
+		Address: address,
+		Name:    name,
+	}
 }
 
 func (msg MsgRegisterAdminRequest) ValidateBasic() error {

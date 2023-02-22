@@ -13,7 +13,7 @@ func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 	legacy.RegisterAminoMsg(cdc, &MsgRegisterAdminRequest{}, "clms/MsgRegisterAdminRequest")
 	legacy.RegisterAminoMsg(cdc, &MsgAddStudentRequest{}, "clms/MsgAddStudentRequest")
 	legacy.RegisterAminoMsg(cdc, &MsgApplyLeaveRequest{}, "clms/MsgApplyLeaveRequest")
-	legacy.RegisterAminoMsg(cdc, &MsgAcceptLeaveRequest{}, "clms/MsgApplyLeaveRequest")
+	legacy.RegisterAminoMsg(cdc, &MsgAcceptLeaveRequest{}, "clms/MsgAcceptLeaveRequest")
 }
 func RegisterInterfaces(registry codectypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),

@@ -10,6 +10,9 @@ package keeper
 import (
 	"context"
 	"lmsmodule/x/lms/types"
+	"log"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type msgServer struct {
@@ -24,10 +27,19 @@ func NewMsgServerImpl(keeper Keeper) types.MsgServer {
 
 // func (k msgServer) mustEmbedUnimplementedMsgServer() {} when just used grpc protoc
 func (k msgServer) RegisterAdmin(ctx context.Context, req *types.MsgRegisterAdminRequest) (*types.MsgRegisterAdminResponse, error) {
+	sdkctx := sdk.UnwrapSDKContext(ctx)
+	k.Keeper.AdminRegister(sdkctx, req)
 	return &types.MsgRegisterAdminResponse{}, nil
 }
 
 func (k msgServer) AddStudent(ctx context.Context, req *types.MsgAddStudentRequest) (*types.MsgAddStudentResponse, error) {
+	sdkctx := sdk.UnwrapSDKContext(ctx)
+	if _, err := sdk.AccAddressFromBech32(req.Admin); err != nil {
+		log.Fatal("___here in admin register, error___", err)
+	}
+	for _, student := range req.Students {
+		k.Keeper.AddStudent(sdkctx, student)
+	}
 	return &types.MsgAddStudentResponse{}, nil
 }
 
