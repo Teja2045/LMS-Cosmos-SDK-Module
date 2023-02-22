@@ -1,0 +1,3 @@
+syntax="proto3";
+package cosmos.lms.v1beta1;
+option go_package="x/lms/types";

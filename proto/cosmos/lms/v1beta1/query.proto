@@ -1,0 +1,55 @@
+syntax="proto3";
+package cosmos.lms.v1beta1;
+option go_package="x/lms/types";    
+import "google/api/annotations.proto" ;                                                                                                                                                                                                                                                                                                                                                                       
+service Query {
+    
+    //shows the list of leaves for admin
+    rpc ListLeaves(ListLeavesRequest) returns (ListLeavesResponse) {};
+    
+    // show the status of the leave request for a student
+    rpc LeaveStatus(LeaveStatusRequest) returns (LeaveStatusResponse) {};
+    
+}
+
+message ListLeavesRequest {
+    // address is the account address of the admin.
+    string address = 1;
+    
+    // name is the admin name
+    string name = 2;
+}
+
+message ListLeavesResponse {
+    repeated Leave leaves = 1;
+}
+
+
+
+message LeaveStatusRequest {
+    
+    // student address
+    string address = 1;
+    
+    // student name
+    string name = 2;
+    
+}
+
+message LeaveStatusResponse {
+    Leave leave = 1;
+}
+
+
+message Leave {
+    
+    string address = 1;
+    
+    string reason = 2;
+    
+    // google.protobuf.Timestamp from = 3;
+    // 
+    // google.protobuf.Timestamp to = 4;
+
+    bool status = 5;
+}
