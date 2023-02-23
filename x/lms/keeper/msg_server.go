@@ -33,10 +33,12 @@ func (k msgServer) RegisterAdmin(ctx context.Context, req *types.MsgRegisterAdmi
 }
 
 func (k msgServer) AddStudent(ctx context.Context, req *types.MsgAddStudentRequest) (*types.MsgAddStudentResponse, error) {
-	sdkctx := sdk.UnwrapSDKContext(ctx)
+
 	if _, err := sdk.AccAddressFromBech32(req.Admin); err != nil {
 		log.Fatal("___here in admin register, error___", err)
 	}
+
+	sdkctx := sdk.UnwrapSDKContext(ctx)
 	for _, student := range req.Students {
 		k.Keeper.AddStudent(sdkctx, student)
 	}
@@ -44,10 +46,20 @@ func (k msgServer) AddStudent(ctx context.Context, req *types.MsgAddStudentReque
 }
 
 func (k msgServer) ApplyLeave(ctx context.Context, req *types.MsgApplyLeaveRequest) (*types.MsgApplyLeaveResponse, error) {
+	if _, err := sdk.AccAddressFromBech32(req.Address); err != nil {
+		log.Fatal("___here in admin register, error___", err)
+	}
+	sdkctx := sdk.UnwrapSDKContext(ctx)
+	k.Keeper.AddLeave(sdkctx, req)
 	return &types.MsgApplyLeaveResponse{}, nil
 }
 
 func (k msgServer) AcceptLeave(ctx context.Context, req *types.MsgAcceptLeaveRequest) (*types.MsgAcceptLeaveResponse, error) {
+	if _, err := sdk.AccAddressFromBech32(req.Admin); err != nil {
+		log.Fatal("___here in admin register, error___", err)
+	}
+	sdkctx := sdk.UnwrapSDKContext(ctx)
+	k.Keeper.Accept(sdkctx, req.Student, req.Admin)
 	return &types.MsgAcceptLeaveResponse{}, nil
 }
 

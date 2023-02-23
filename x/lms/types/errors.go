@@ -11,4 +11,6 @@ var (
 	ErrStudentDetailsNil    = sdkerrors.Register(ModuleName, 6, "Student Details should not be nil")
 	ErrEmptyReason          = sdkerrors.Register(ModuleName, 7, "Reason should not be empty")
 	ErrStudentAlreadyExists = sdkerrors.Register(ModuleName, 8, "Student is already there in store")
+	ErrLeaveNeverApplied    = sdkerrors.Register(ModuleName, 9, "Student never applied leave")
+	ErrLeaveAlreadyHandled  = sdkerrors.Register(ModuleName, 10, "Leave is already handled")
 )

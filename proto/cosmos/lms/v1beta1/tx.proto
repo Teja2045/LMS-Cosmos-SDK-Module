@@ -64,7 +64,8 @@ message MsgAcceptLeaveRequest {
 
     string admin = 1;
     
-    uint64 leave_id = 2;
+    // using it as student id, will accept his latest leave request if any
+    string student = 2;
 
     LeaveStatus status = 3;
 }

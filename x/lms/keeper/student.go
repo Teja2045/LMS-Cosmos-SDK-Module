@@ -25,7 +25,6 @@ func (k Keeper) AddStudent(ctx sdk.Context, student *types.Student) error {
 		store.Set(types.StudentStoreKey(student.Address), val)
 	}
 
-	//fmt.Println("inside keeper.go after storing ", store.Get(types.AdminstoreKey(req.Address)))
 	return nil
 }
 
