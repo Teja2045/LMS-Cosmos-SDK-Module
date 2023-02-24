@@ -100,6 +100,7 @@ func (suite *TestSuite) TestKeeper_AdminRegister() {
 func (suite *TestSuite) TestKeeper_AddStudent() {
 
 	require := suite.Require()
+	fmt.Println("hi ruth")
 	exampleStudentAdress1 := sdk.AccAddress("address1").String()
 
 	student := &types.Student{

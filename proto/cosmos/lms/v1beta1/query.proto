@@ -43,6 +43,7 @@ message LeaveStatusResponse {
 
 message Leave {
     
+    // admin address
     string address = 1;
     
     string reason = 2;

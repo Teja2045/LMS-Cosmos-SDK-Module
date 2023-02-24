@@ -61,5 +61,4 @@ func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.
 		Address: leave.Admin,
 		Status:  (leave.Status == types.LeaveStatus_STATUS_ACCEPTED),
 	}, nil
-
 }

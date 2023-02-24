@@ -3,7 +3,7 @@ package types
 import "strconv"
 
 const (
-	ModuleName   = "leavemanagementsystem"
+	ModuleName   = "lms"
 	StoreKey     = ModuleName
 	RouterKey    = ModuleName
 	QuerierRoute = ModuleName
