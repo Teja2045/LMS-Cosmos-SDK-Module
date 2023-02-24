@@ -15,6 +15,14 @@ func (k Keeper) AddStudent(ctx sdk.Context, student *types.Student) error {
 		return err
 	}
 
+	if student.Name == "" {
+		return types.ErrStudentNameNil
+	}
+
+	if student.Id == "" {
+		return types.ErrStudentIdNil
+	}
+
 	store := ctx.KVStore(k.storeKey)
 	val, err := k.cdc.Marshal(student)
 	if err != nil {

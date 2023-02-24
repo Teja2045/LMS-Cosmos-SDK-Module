@@ -15,6 +15,10 @@ func (k Keeper) AdminRegister(ctx sdk.Context, req *types.MsgRegisterAdminReques
 		return err
 	}
 
+	if req.Address == "" {
+		return types.ErrAdminNameNil
+	}
+
 	store := ctx.KVStore(k.storeKey)
 	val, err := k.cdc.Marshal(req)
 	if err != nil {
