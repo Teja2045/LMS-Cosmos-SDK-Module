@@ -1,7 +1,6 @@
 package keeper_test
 
 import (
-	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -100,7 +99,7 @@ func (suite *TestSuite) TestKeeper_AdminRegister() {
 func (suite *TestSuite) TestKeeper_AddStudent() {
 
 	require := suite.Require()
-	fmt.Println("hi ruth")
+	//fmt.Println("hi ruth")
 	exampleStudentAdress1 := sdk.AccAddress("address1").String()
 
 	student := &types.Student{
@@ -110,13 +109,13 @@ func (suite *TestSuite) TestKeeper_AddStudent() {
 	}
 	suite.stdntKeeper.AddStudent(suite.ctx, student)
 
-	cdc := suite.stdntKeeper.GetCodec()
-	expected, _ := cdc.Marshal(student)
+	//cdc := suite.stdntKeeper.GetCodec()
+	//expected, _ := cdc.Marshal(student)
 
 	// retrieve the student from the keeper using the GetStudent method
-	retrievedAdmin := suite.stdntKeeper.GetStudent(suite.ctx, exampleStudentAdress1)
+	retrievedStudent := suite.stdntKeeper.GetStudent(suite.ctx, exampleStudentAdress1)
 
-	require.Equal(expected, retrievedAdmin)
+	require.Equal(student, retrievedStudent)
 
 	err := suite.stdntKeeper.AddStudent(suite.ctx, student)
 	require.Equal(err, types.ErrStudentAlreadyExists)
@@ -180,11 +179,19 @@ func (suite *TestSuite) TestKeeper_Leaves() {
 
 }
 
-// demo test
+// demo test - fails because we are registering student before applying leave
 func (suite *TestSuite) TestKeeper_ApplyLeave() {
 
 	require := suite.Require()
 	exampleStudentAdress1 := sdk.AccAddress("address1").String()
+
+	student := types.Student{
+		Address: exampleStudentAdress1,
+		Name:    "Saiteja",
+		Id:      "B162045",
+	}
+	suite.stdntKeeper.AddStudent(suite.ctx, &student)
+
 	//format := "2006-Jan-06"
 	from, _ := time.Parse(format, "2023-Feb-23")
 	to, _ := time.Parse(format, "2023-Feb-27")
@@ -196,9 +203,9 @@ func (suite *TestSuite) TestKeeper_ApplyLeave() {
 		From:    &from,
 		To:      &to,
 	}
-	fmt.Println("check1")
+	//fmt.Println("check1")
 	suite.stdntKeeper.AddLeave(suite.ctx, leave)
-	fmt.Println("check2")
+	//fmt.Println("check2")
 
 	//cdc := suite.stdntKeeper.GetCodec()
 
@@ -271,7 +278,7 @@ func (suite *TestSuite) TestKeeper_AcceptLeave() {
 	for _, test := range leaveAcceptTests {
 
 		//adding this line so that previous test wouldnt effect current test
-		require := suite.require
+		require := suite.Require()
 		if test.registerStudent {
 			suite.stdntKeeper.AddStudent(suite.ctx, &test.student)
 		}
