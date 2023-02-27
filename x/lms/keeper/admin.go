@@ -79,7 +79,6 @@ func (k Keeper) Accept(ctx sdk.Context, studentAddress string, adminAddress stri
 
 	store.Set(types.LeaveStatusStoreKey(adminAddress, leaveId), val)
 	return nil
-
 }
 
 func (k Keeper) Reject(ctx sdk.Context, studentAddress string, adminAddress string) error {
@@ -114,5 +113,32 @@ func (k Keeper) Reject(ctx sdk.Context, studentAddress string, adminAddress stri
 	val, _ := k.cdc.Marshal(leaveStatus)
 
 	store.Set(types.LeaveStatusStoreKey(adminAddress, leaveId), val)
+	pendingLeaveStudentList := DecodeList(store.Get(types.PendingLeaveStudentsStoreKey()))
+	for i, student := range pendingLeaveStudentList {
+		if student == studentAddress {
+			pendingLeaveStudentList = append(pendingLeaveStudentList[:i], pendingLeaveStudentList[i+1:]...)
+			store.Set(types.PendingLeaveStudentsStoreKey(), EncodeList(pendingLeaveStudentList))
+			break
+		}
+	}
 	return nil
+}
+
+func (k Keeper) ListPendingLeaveStudents(ctx sdk.Context, adminAddress string) ([]string, error) {
+	if _, err := sdk.AccAddressFromBech32(adminAddress); err != nil {
+		fmt.Println("___here in admin register, error___")
+		return []string{}, err
+	}
+
+	if adminAddress == "" {
+		return []string{}, types.ErrAdminNameNil
+	}
+
+	store := ctx.KVStore(k.storeKey)
+
+	if store.Get(types.AdminstoreKey(adminAddress)) == nil {
+		return []string{}, types.ErrAdminDoesNotExist
+	}
+	StudentAddressList := store.Get(types.PendingLeaveStudentsStoreKey())
+	return DecodeList(StudentAddressList), nil
 }

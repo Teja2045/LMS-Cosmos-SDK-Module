@@ -26,6 +26,9 @@ var (
 
 	//0x05+studenadress+leaveid(value from leave counter) -> leave status
 	LeaveStatusKey = []byte{0x05}
+
+	//key to access pending leaves... It is a global key
+	PendingLeaveStudentsKey = []byte{0x06}
 )
 
 func AdminstoreKey(admin string) []byte {
@@ -65,4 +68,8 @@ func LeaveStatusStoreKey(studentAddress string, leaveid int) []byte {
 	copy(key[len(LeaveStatusKey):], []byte(studentAddress))
 	copy(key[len(LeaveStatusKey)+len(studentAddress):], []byte(leaveId))
 	return key
+}
+
+func PendingLeaveStudentsStoreKey() []byte {
+	return PendingLeaveStudentsKey
 }

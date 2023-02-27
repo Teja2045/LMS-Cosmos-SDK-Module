@@ -32,7 +32,14 @@ func (k Keeper) AddLeave(ctx sdk.Context, leave *types.MsgApplyLeaveRequest) err
 	leaveId++
 	store.Set(types.LeaveCounterStoreKey(leave.Address), []byte(strconv.Itoa(leaveId)))
 	store.Set(types.LeaveStoreKey(leave.Address, leaveId), val)
-
+	pendingLeaveStudentList := DecodeList(store.Get(types.PendingLeaveStudentsStoreKey()))
+	for _, studentAddress := range pendingLeaveStudentList {
+		if studentAddress == leave.Address {
+			return nil
+		}
+	}
+	pendingLeaveStudentList = append(pendingLeaveStudentList, leave.Address)
+	store.Set(types.PendingLeaveStudentsStoreKey(), EncodeList(pendingLeaveStudentList))
 	return nil
 }
 
