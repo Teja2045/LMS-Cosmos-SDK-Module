@@ -1,14 +1,18 @@
 syntax="proto3";
-package cosmos.lms.v1beta1;
+package lms.v1beta1;
 option go_package="x/lms/types";    
 import "google/api/annotations.proto" ;                                                                                                                                                                                                                                                                                                                                                                       
 service Query {
     
     //shows the list of leaves for admin
-    rpc ListLeaves(ListLeavesRequest) returns (ListLeavesResponse) {};
+    rpc ListLeaves(ListLeavesRequest) returns (ListLeavesResponse) {
+        option (google.api.http).get   = "/cosmos/lms/v1beta1/adminaddress";
+    };
     
     // show the status of the leave request for a student
-    rpc LeaveStatus(LeaveStatusRequest) returns (LeaveStatusResponse) {};
+    rpc LeaveStatus(LeaveStatusRequest) returns (LeaveStatusResponse) {
+        option (google.api.http).get   = "/cosmos/lms/v1beta1/studentaddress";
+    };
     
 }
 

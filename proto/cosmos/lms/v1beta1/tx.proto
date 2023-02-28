@@ -1,20 +1,20 @@
 syntax="proto3";
-package cosmos.lms.v1beta1;
+package lms.v1beta1;
 option go_package="x/lms/types";
 import "google/protobuf/timestamp.proto";
 import "gogoproto/gogo.proto";
 service Msg {
     // RegisterAdmin adds a new admin
-    rpc RegisterAdmin(MsgRegisterAdminRequest) returns (MsgRegisterAdminResponse) {};
+    rpc MsgRegisterAdmin(MsgRegisterAdminRequest) returns (MsgRegisterAdminResponse) {};
     
     // AddStudent adds new student
-    rpc AddStudent(MsgAddStudentRequest) returns (MsgAddStudentResponse) {};
+    rpc MsgAddStudent(MsgAddStudentRequest) returns (MsgAddStudentResponse) {};
     
     // ApplyLeave request a new leave
-    rpc ApplyLeave(MsgApplyLeaveRequest) returns (MsgApplyLeaveResponse) {};
+    rpc MsgApplyLeave(MsgApplyLeaveRequest) returns (MsgApplyLeaveResponse) {};
     
     // AcceptLeave accept or reject a leave
-    rpc AcceptLeave(MsgAcceptLeaveRequest) returns (MsgAcceptLeaveResponse) {};
+    rpc MsgAcceptLeave(MsgAcceptLeaveRequest) returns (MsgAcceptLeaveResponse) {};
 }
 
 message MsgRegisterAdminRequest {
@@ -73,7 +73,6 @@ message MsgAcceptLeaveRequest {
 message MsgAcceptLeaveResponse {
 
 }
-
 message Student {
     // address is the account address of the student.
     string address = 1;

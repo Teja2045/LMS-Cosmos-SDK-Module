@@ -280,7 +280,6 @@ var leaveAcceptTests = []LeaveAcceptTest{
 func (suite *TestSuite) TestKeeper_AcceptLeave() {
 
 	for _, test := range leaveAcceptTests {
-		fmt.Println("here-------------------------->")
 
 		//adding this line so that previous test wouldnt effect current test
 		require := suite.Require()
