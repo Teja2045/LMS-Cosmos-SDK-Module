@@ -6,11 +6,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/server"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	// "github.com/cosmos/cosmos-sdk/simapp"
-	"lmsmodule/lmsapp"
+	lmsapp "lmsmodule/simapp"
 
-	// "github.com/cosmos/cosmos-sdk/simapp/simd/cmd"
-	"lmsmodule/lmsapp/simd/cmd"
+	"lmsmodule/simapp/simd/cmd"
 )
 
 func main() {

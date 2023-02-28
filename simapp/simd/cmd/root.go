@@ -23,10 +23,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/server"
 	serverconfig "github.com/cosmos/cosmos-sdk/server/config"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
-
-	"lmsmodule/lmsapp"
-
 	"github.com/cosmos/cosmos-sdk/simapp"
+
+	lmsapp "lmsmodule/simapp"
+
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -40,7 +40,7 @@ import (
 // NewRootCmd creates a new root command for simd. It is called once in the
 // main function.
 func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
-	encodingConfig := lmsapp.MakeTestEncodingConfig()
+	encodingConfig := simapp.MakeTestEncodingConfig()
 	initClientCtx := client.Context{}.
 		WithCodec(encodingConfig.Codec).
 		WithInterfaceRegistry(encodingConfig.InterfaceRegistry).
