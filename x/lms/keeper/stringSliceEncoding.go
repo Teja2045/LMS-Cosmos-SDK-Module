@@ -3,6 +3,7 @@ package keeper
 import (
 	"bytes"
 	"encoding/gob"
+	"fmt"
 )
 
 func DecodeList(byteArray []byte) []string {
@@ -11,8 +12,9 @@ func DecodeList(byteArray []byte) []string {
 	dec := gob.NewDecoder(buf)
 	err := dec.Decode(&list)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
+	fmt.Println(list)
 	return list
 }
 

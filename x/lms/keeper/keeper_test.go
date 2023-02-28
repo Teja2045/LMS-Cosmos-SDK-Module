@@ -1,6 +1,7 @@
 package keeper_test
 
 import (
+	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -165,15 +166,18 @@ var leaveTests = []AddLeaveTest{
 
 func (suite *TestSuite) TestKeeper_Leaves() {
 
-	require := suite.Require()
 	for _, test := range leaveTests {
 
+		fmt.Println("here-------------->")
+
 		//adding this line so that previous test wouldnt effect current test
+		require := suite.Require()
 		//require := suite.require
 		if test.student.Address != "" {
 			suite.stdntKeeper.AddStudent(suite.ctx, &test.student)
 		}
 		err := suite.stdntKeeper.AddLeave(suite.ctx, &test.arg1)
+		fmt.Println(err, " ", test.expected)
 		require.Equal(err, test.expected)
 	}
 
@@ -276,6 +280,7 @@ var leaveAcceptTests = []LeaveAcceptTest{
 func (suite *TestSuite) TestKeeper_AcceptLeave() {
 
 	for _, test := range leaveAcceptTests {
+		fmt.Println("here-------------------------->")
 
 		//adding this line so that previous test wouldnt effect current test
 		require := suite.Require()
@@ -290,6 +295,7 @@ func (suite *TestSuite) TestKeeper_AcceptLeave() {
 		}
 
 		err := suite.stdntKeeper.Accept(suite.ctx, test.studentaddress, test.adminaddress)
+		fmt.Println(err, " ", test.expected)
 
 		require.Equal(err, test.expected)
 	}
