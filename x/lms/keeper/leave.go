@@ -43,24 +43,24 @@ func (k Keeper) AddLeave(ctx sdk.Context, leave *types.MsgApplyLeaveRequest) err
 	return nil
 }
 
-func (k Keeper) GetLeave(ctx sdk.Context, req string) (*types.MsgApplyLeaveRequest, error) {
+func (k Keeper) GetLeave(ctx sdk.Context, studentAddress string) (*types.MsgApplyLeaveRequest, error) {
 	//fmt.Println("in GetLeave1: ")
-	if _, err := sdk.AccAddressFromBech32(req); err != nil {
+	if _, err := sdk.AccAddressFromBech32(studentAddress); err != nil {
 		return &types.MsgApplyLeaveRequest{}, err
 	}
 	//fmt.Println("in GetLeave2: ")
 	store := ctx.KVStore(k.storeKey)
-	if store.Get(types.StudentStoreKey(req)) == nil {
+	if store.Get(types.StudentStoreKey(studentAddress)) == nil {
 		return &types.MsgApplyLeaveRequest{}, types.ErrStudentDoesNotExist
 	}
 	//fmt.Println("in GetLeave3: ")
-	leaveId, _ := strconv.Atoi(string(store.Get(types.LeaveCounterStoreKey(req))))
+	leaveId, _ := strconv.Atoi(string(store.Get(types.LeaveCounterStoreKey(studentAddress))))
 	if leaveId == 0 {
 		return &types.MsgApplyLeaveRequest{}, types.ErrLeaveNeverApplied
 	}
 	//fmt.Println("in GetLeave4: ")
 	leave := &types.MsgApplyLeaveRequest{}
-	k.cdc.Unmarshal(store.Get(types.LeaveStoreKey(req, leaveId)), leave)
-	fmt.Println(req, " ", leave)
+	k.cdc.Unmarshal(store.Get(types.LeaveStoreKey(studentAddress, leaveId)), leave)
+	fmt.Println(studentAddress, " ", leave)
 	return leave, nil
 }
