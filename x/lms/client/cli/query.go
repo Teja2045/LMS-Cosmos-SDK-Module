@@ -20,6 +20,7 @@ func GetQueryCmd() *cobra.Command {
 
 	lmsQueryCmd.AddCommand(
 		GetCmdLeavetatus(),
+		GetCmdListLeaves(),
 	)
 	return lmsQueryCmd
 }
@@ -40,6 +41,32 @@ func GetCmdLeavetatus() *cobra.Command {
 			}
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.LeaveStatus(cmd.Context(), leaveStatusRequest)
+			if err != nil {
+				return err
+			}
+			return clientCtx.PrintProto(res)
+		},
+	}
+	flags.AddQueryFlagsToCmd(cmd)
+	return cmd
+}
+
+// GetCmdListLeaves returns list of leaves that are still pending.
+func GetCmdListLeaves() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "ListLeaves",
+		Short: "| student Address | student name |",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientQueryContext(cmd)
+			if err != nil {
+				return err
+			}
+			listLeavesRequest := &types.ListLeavesRequest{
+				Address: args[0],
+				Name:    args[1],
+			}
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.ListLeaves(cmd.Context(), listLeavesRequest)
 			if err != nil {
 				return err
 			}
