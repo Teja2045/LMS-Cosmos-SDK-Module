@@ -10,56 +10,46 @@ package keeper
 import (
 	"context"
 	"lmsmodule/x/lms/types"
-	"log"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-type msgServer struct {
-	Keeper
-}
+// type msgServer struct {
+// 	Keeper
+// }
 
-var _ types.MsgServer = &msgServer{}
+var _ types.MsgServer = Keeper{}
 
-func NewMsgServerImpl(keeper Keeper) types.MsgServer {
-	return &msgServer{Keeper: keeper}
-}
+// func NewMsgServerImpl(keeper Keeper) types.MsgServer {
+// 	return &msgServer{Keeper: keeper}
+// }
 
 // func (k msgServer) mustEmbedUnimplementedMsgServer() {} when just used grpc protoc
-func (k msgServer) RegisterAdmin(ctx context.Context, req *types.MsgRegisterAdminRequest) (*types.MsgRegisterAdminResponse, error) {
+
+func (k Keeper) MsgRegisterAdmin(ctx context.Context, req *types.MsgRegisterAdminRequest) (*types.MsgRegisterAdminResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	k.Keeper.AdminRegister(sdkctx, req)
+	k.AdminRegister(sdkctx, req)
 	return &types.MsgRegisterAdminResponse{}, nil
 }
 
-func (k msgServer) AddStudent(ctx context.Context, req *types.MsgAddStudentRequest) (*types.MsgAddStudentResponse, error) {
-
-	if _, err := sdk.AccAddressFromBech32(req.Admin); err != nil {
-		log.Fatal("___here in admin register, error___", err)
-	}
+func (k Keeper) MsgAddStudent(ctx context.Context, req *types.MsgAddStudentRequest) (*types.MsgAddStudentResponse, error) {
 
 	sdkctx := sdk.UnwrapSDKContext(ctx)
 	for _, student := range req.Students {
-		k.Keeper.AddStudent(sdkctx, student)
+		k.AddStudent(sdkctx, student)
 	}
 	return &types.MsgAddStudentResponse{}, nil
 }
 
-func (k msgServer) ApplyLeave(ctx context.Context, req *types.MsgApplyLeaveRequest) (*types.MsgApplyLeaveResponse, error) {
-	if _, err := sdk.AccAddressFromBech32(req.Address); err != nil {
-		log.Fatal("___here in admin register, error___", err)
-	}
+func (k Keeper) MsgApplyLeave(ctx context.Context, req *types.MsgApplyLeaveRequest) (*types.MsgApplyLeaveResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	k.Keeper.AddLeave(sdkctx, req)
+	k.AddLeave(sdkctx, req)
 	return &types.MsgApplyLeaveResponse{}, nil
 }
 
-func (k msgServer) AcceptLeave(ctx context.Context, req *types.MsgAcceptLeaveRequest) (*types.MsgAcceptLeaveResponse, error) {
-	if _, err := sdk.AccAddressFromBech32(req.Admin); err != nil {
-		log.Fatal("___here in admin register, error___", err)
-	}
+func (k Keeper) MsgAcceptLeave(ctx context.Context, req *types.MsgAcceptLeaveRequest) (*types.MsgAcceptLeaveResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	k.Keeper.Accept(sdkctx, req.Student, req.Admin)
+	k.Accept(sdkctx, req.Student, req.Admin)
 	return &types.MsgAcceptLeaveResponse{}, nil
 }
 

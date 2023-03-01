@@ -32,7 +32,7 @@ func GetTxCmd() *cobra.Command {
 // NewCmdRegisterAdmin creates a CLI command for MsgRegisterAdminRequest.
 func NewCmdRegisterAdmin() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "registerAdmin",
+		Use:   "RegisterAdmin",
 		Short: "| address | Name |",
 		Long:  `registers admin`,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -89,7 +89,7 @@ func NewCmdAddStudents() *cobra.Command {
 // NewCmdApplyLeave creates a CLI command for MsgApplyLeave.
 func NewCmdApplyLeave() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "applyLeave",
+		Use:   "ApplyLeave",
 		Short: "| address | reason | from | to |",
 		Long:  `to apply leave`,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -117,7 +117,7 @@ func NewCmdApplyLeave() *cobra.Command {
 // NewCmdAcceptLeave creates a CLI command for MsgAcceptLeave.
 func NewCmdAcceptLeave() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "acceptLeave",
+		Use:   "AcceptLeave",
 		Short: "| admin address | student address |",
 		Long:  `For admin to Accept a leave`,
 		RunE: func(cmd *cobra.Command, args []string) error {

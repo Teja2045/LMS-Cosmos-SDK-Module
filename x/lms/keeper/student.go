@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	"lmsmodule/x/lms/types"
 	"log"
 	"strconv"
@@ -10,10 +9,11 @@ import (
 )
 
 func (k Keeper) AddStudent(ctx sdk.Context, student *types.Student) error {
-	if _, err := sdk.AccAddressFromBech32(student.Address); err != nil {
-		fmt.Println("___here in admin register, error___")
-		return err
-	}
+	// if _, err := sdk.AccAddressFromBech32(student.Address); err != nil {
+	// 	log.Println(student.Address)
+	// 	fmt.Println("___here in admin register, error___")
+	// 	return types.ErrStudentAlreadyExists
+	// }
 
 	if student.Name == "" {
 		return types.ErrStudentNameNil

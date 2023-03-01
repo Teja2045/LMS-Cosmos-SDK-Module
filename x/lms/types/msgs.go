@@ -18,7 +18,7 @@ func NewMsgAddStudentRequest() *MsgAddStudentRequest {
 }
 
 func (msg MsgAddStudentRequest) ValidateBasic() error {
-	eg := "some address"
+	eg := msg.Admin
 	if _, err := sdk.AccAddressFromBech32(eg); err != nil {
 		return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
 	}
@@ -86,7 +86,7 @@ func (msg MsgRegisterAdminRequest) GetSignBytes() []byte {
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
 func (msg MsgRegisterAdminRequest) GetSigners() []sdk.AccAddress {
-	sign := "some sign"
+	sign := msg.Address
 	addr, _ := sdk.AccAddressFromBech32(sign)
 	return []sdk.AccAddress{addr}
 }
@@ -99,7 +99,7 @@ func NewMsgAcceptLeaveRequest() *MsgAcceptLeaveRequest {
 }
 
 func (msg MsgAcceptLeaveRequest) ValidateBasic() error {
-	eg := "some address"
+	eg := msg.Admin
 	if _, err := sdk.AccAddressFromBech32(eg); err != nil {
 		return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
 	}
@@ -112,7 +112,7 @@ func (msg MsgAcceptLeaveRequest) GetSignBytes() []byte {
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
 func (msg MsgAcceptLeaveRequest) GetSigners() []sdk.AccAddress {
-	sign := "some sign"
+	sign := msg.Admin
 	addr, _ := sdk.AccAddressFromBech32(sign)
 	return []sdk.AccAddress{addr}
 }

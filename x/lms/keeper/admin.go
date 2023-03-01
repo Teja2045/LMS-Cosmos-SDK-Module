@@ -10,20 +10,25 @@ import (
 )
 
 func (k Keeper) AdminRegister(ctx sdk.Context, req *types.MsgRegisterAdminRequest) error {
+	fmt.Println("1")
 	if _, err := sdk.AccAddressFromBech32(req.Address); err != nil {
 		fmt.Println("___here in admin register, error___")
 		return err
 	}
+	fmt.Println("2")
 
 	if req.Address == "" {
 		return types.ErrAdminNameNil
 	}
+	fmt.Println("3")
 
 	store := ctx.KVStore(k.storeKey)
 	val, err := k.cdc.Marshal(req)
 	if err != nil {
+		fmt.Println("4")
 		return err
 	} else {
+		fmt.Println("5")
 		store.Set(types.AdminstoreKey(req.Address), val)
 	}
 	//fmt.Println("inside keeper.go after storing ", store.Get(types.AdminstoreKey(req.Address)))

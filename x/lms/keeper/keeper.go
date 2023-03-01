@@ -14,6 +14,10 @@ type Keeper struct {
 	storeKey storetypes.StoreKey
 }
 
+func (k Keeper) StoreKey() storetypes.StoreKey {
+	return k.storeKey
+}
+
 // NewKeeper creates a new lms Keeper instance
 func NewKeeper(key storetypes.StoreKey,
 	cdc codec.BinaryCodec,
