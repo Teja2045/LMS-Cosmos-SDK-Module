@@ -57,7 +57,7 @@ func (msg MsgApplyLeaveRequest) GetSignBytes() []byte {
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
 func (msg MsgApplyLeaveRequest) GetSigners() []sdk.AccAddress {
-	sign := "some sign"
+	sign := msg.SignerAddress
 	addr, _ := sdk.AccAddressFromBech32(sign)
 	return []sdk.AccAddress{addr}
 }
@@ -86,7 +86,7 @@ func (msg MsgRegisterAdminRequest) GetSignBytes() []byte {
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
 func (msg MsgRegisterAdminRequest) GetSigners() []sdk.AccAddress {
-	sign := msg.Address
+	sign := msg.SignerAddress
 	addr, _ := sdk.AccAddressFromBech32(sign)
 	return []sdk.AccAddress{addr}
 }
@@ -112,7 +112,7 @@ func (msg MsgAcceptLeaveRequest) GetSignBytes() []byte {
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
 func (msg MsgAcceptLeaveRequest) GetSigners() []sdk.AccAddress {
-	sign := msg.Admin
+	sign := msg.SignerAddress
 	addr, _ := sdk.AccAddressFromBech32(sign)
 	return []sdk.AccAddress{addr}
 }

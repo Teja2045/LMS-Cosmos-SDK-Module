@@ -45,6 +45,8 @@ func (k Keeper) GetAdmin(ctx sdk.Context, req string) []byte {
 
 func (k Keeper) Accept(ctx sdk.Context, studentAddress string, adminAddress string) error {
 
+	//fmt.Println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+
 	// if admin address is valid
 	if _, err := sdk.AccAddressFromBech32(adminAddress); err != nil {
 		return err
@@ -57,11 +59,14 @@ func (k Keeper) Accept(ctx sdk.Context, studentAddress string, adminAddress stri
 		return types.ErrAdminDoesNotExist
 	}
 
+	//fmt.Println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+
 	// if student is not registered
 	if store.Get(types.StudentStoreKey(studentAddress)) == nil {
 		return types.ErrStudentDoesNotExist
 	}
 
+	//fmt.Println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 	leaveId, _ := strconv.Atoi(string(store.Get(types.LeaveCounterStoreKey(studentAddress))))
 
 	// if a student never applied for a leave
@@ -69,10 +74,12 @@ func (k Keeper) Accept(ctx sdk.Context, studentAddress string, adminAddress stri
 		return types.ErrLeaveNeverApplied
 	}
 
+	//fmt.Println("here--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 	// if most recent leave request is already handled
 	if store.Get(types.LeaveStatusStoreKey(studentAddress, leaveId)) != nil {
 		return types.ErrLeaveAlreadyHandled
 	}
+	//fmt.Println("here1--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 
 	leaveStatus := &types.MsgAcceptLeaveRequest{
 		Admin:   adminAddress,
@@ -80,9 +87,31 @@ func (k Keeper) Accept(ctx sdk.Context, studentAddress string, adminAddress stri
 		Status:  types.LeaveStatus_STATUS_ACCEPTED,
 	}
 
+	//fmt.Println("here2--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+
 	val, _ := k.cdc.Marshal(leaveStatus)
 
-	store.Set(types.LeaveStatusStoreKey(adminAddress, leaveId), val)
+	store.Set(types.LeaveStatusStoreKey(studentAddress, leaveId), val)
+	fmt.Println("here4--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+
+	var leave types.MsgAcceptLeaveRequest
+	//panic(fmt.Sprint("yoooooooooooooooooooo", val))
+	fmt.Println("===========================")
+	fmt.Print(store.Get(types.LeaveStatusStoreKey(studentAddress, leaveId)))
+	fmt.Println("===========================")
+	if err := k.cdc.Unmarshal(store.Get(types.LeaveStatusStoreKey(studentAddress, leaveId)), &leave); err != nil {
+		panic(err)
+	}
+	fmt.Println("here5-----------------------------------------------", leave)
+	//panic(fmt.Sprint("yoooooooooooooooooooo", leave))
+	pendingLeaveStudentList := DecodeList(store.Get(types.PendingLeaveStudentsStoreKey()))
+	for i, student := range pendingLeaveStudentList {
+		if student == studentAddress {
+			pendingLeaveStudentList = append(pendingLeaveStudentList[:i], pendingLeaveStudentList[i+1:]...)
+			store.Set(types.PendingLeaveStudentsStoreKey(), EncodeList(pendingLeaveStudentList))
+			break
+		}
+	}
 	return nil
 }
 

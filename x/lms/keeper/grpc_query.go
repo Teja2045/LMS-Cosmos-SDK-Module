@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"fmt"
 	"lmsmodule/x/lms/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -21,7 +22,13 @@ func (k Keeper) ListLeaves(ctx context.Context, listLeavesRequest *types.ListLea
 }
 
 func (k Keeper) LeaveStatus(ctx context.Context, leaveStatusRequest *types.LeaveStatusRequest) (*types.LeaveStatusResponse, error) {
+
+	// fmt.Println("leaves in query")
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	leave, _ := k.CheckLeaveStatus(sdkctx, leaveStatusRequest.Address)
+	// panic(fmt.Sprintf("value =================================%v", leaveStatusRequest))
+	leave, err := k.CheckLeaveStatus(sdkctx, leaveStatusRequest.Address)
+	// panic(fmt.Sprintf("at line1", leave, err))
+	fmt.Println(leave, err)
 	return &types.LeaveStatusResponse{Leave: &leave}, nil
+	// return &types.LeaveStatusResponse{}, nil
 }

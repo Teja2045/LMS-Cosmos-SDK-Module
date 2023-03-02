@@ -58,18 +58,42 @@ func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.
 		return types.Leave{}, types.ErrStudentDoesNotExist
 	}
 
-	leaveId, _ := strconv.Atoi(string(store.Get(types.LeaveCounterStoreKey(studentAddress))))
+	leaveIdInBytes := store.Get(types.LeaveCounterStoreKey(studentAddress))
+
+	leaveId := 0
+
+	if leaveIdInBytes != nil {
+		leaveId, _ = strconv.Atoi(string(leaveIdInBytes))
+	}
+
+	//panic("yoooooooooooooooooooo")
 
 	// if a student never applied for a leave
 	if leaveId == 0 {
+
 		return types.Leave{}, types.ErrLeaveNeverApplied
 	}
 
+	//panic(fmt.Sprint(leaveId))
+
+	//panic("yoooooooooooooooooooo")
+
 	val := store.Get(types.LeaveStatusStoreKey(studentAddress, leaveId))
-	var leave *types.MsgAcceptLeaveRequest
-	k.cdc.Unmarshal(val, leave)
-	return types.Leave{
+	if val == nil {
+		return types.Leave{
+			Address: "no admin handled it yet",
+			Status:  false,
+		}, nil
+	}
+	var leave types.MsgAcceptLeaveRequest
+	//panic(fmt.Sprint("yoooooooooooooooooooo", val))
+	k.cdc.Unmarshal(val, &leave)
+	//panic(fmt.Sprint("sdjhd", err))
+
+	res := types.Leave{
 		Address: leave.Admin,
-		Status:  (leave.Status == types.LeaveStatus_STATUS_ACCEPTED),
-	}, nil
+		Status:  true,
+	}
+	//panic(res)
+	return res, nil
 }

@@ -23,6 +23,8 @@ message MsgRegisterAdminRequest {
     
     // name is the admin name
     string name = 2;
+
+    string signerAddress = 3;
 }
 
 message MsgRegisterAdminResponse{}
@@ -33,6 +35,8 @@ message MsgAddStudentRequest {
     
     // students is the list of Student.
     repeated Student students = 2;
+
+    string signerAddress = 3;
 }
 
 message MsgAddStudentResponse{}
@@ -46,6 +50,8 @@ message MsgApplyLeaveRequest {
     google.protobuf.Timestamp from = 3 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
      
     google.protobuf.Timestamp to = 4 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
+
+    string signerAddress = 5;
 }
 
 message MsgApplyLeaveResponse {
@@ -68,6 +74,8 @@ message MsgAcceptLeaveRequest {
     string student = 2;
 
     LeaveStatus status = 3;
+
+    string signerAddress = 4;
 }
 
 message MsgAcceptLeaveResponse {

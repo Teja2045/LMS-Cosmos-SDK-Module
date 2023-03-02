@@ -1,6 +1,8 @@
 package cli
 
 import (
+	"context"
+
 	"github.com/spf13/cobra"
 
 	"lmsmodule/x/lms/types"
@@ -39,9 +41,14 @@ func GetCmdLeavetatus() *cobra.Command {
 				Address: args[0],
 				Name:    args[1],
 			}
+
+			//fmt.Println("args", args)
+			//fmt.Println(leaveStatusRequest)
 			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.LeaveStatus(cmd.Context(), leaveStatusRequest)
+			res, err := queryClient.LeaveStatus(context.Background(), leaveStatusRequest)
+			//fmt.Println("err", err)
 			if err != nil {
+				//fmt.Println("here in client", "\n", "error: ", err, "\n", "res: ", res)
 				return err
 			}
 			return clientCtx.PrintProto(res)
@@ -55,7 +62,7 @@ func GetCmdLeavetatus() *cobra.Command {
 func GetCmdListLeaves() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "ListLeaves",
-		Short: "| student Address | student name |",
+		Short: "| admin Address | admin name |",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -66,7 +73,7 @@ func GetCmdListLeaves() *cobra.Command {
 				Name:    args[1],
 			}
 			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.ListLeaves(cmd.Context(), listLeavesRequest)
+			res, err := queryClient.ListLeaves(context.Background(), listLeavesRequest)
 			if err != nil {
 				return err
 			}
