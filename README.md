@@ -1,15 +1,16 @@
 # LMS-Cosmos-SDK-Module
 
-### store Details:
+### Store Details:
 
 
-admin
-0x01|adminaddress -> admin
+#### admin
+ 0x01|adminaddress -> admin
 
-student
-0x02|studentaddress -> student
+#### student
+ 0x02|studentaddress -> student
 
-student-leavecounter
+
+#### student-leavecounter
 0x04|studentaddress -> number
     
     - number above starts from 1 for each student
@@ -18,15 +19,18 @@ student-leavecounter
 
     - this is the connecting part of students and their leave, can be used for scaling and implementing other 
 
+#### all leaves
 0x03|studentaddress|leaveCounter -> leave
     
     - each time the student applies for a leave, his leave counter is updated, and combining studentaddress+counterNumber forms a unique key for leaves
 
 
+#### handled leaves
 0x05|student address -> signed/handled leaves
 
     - after admin handles(accept/reject) student's most recently applied leave, it will be stored here. These handled leaves also contains the info about the Admin who signed/ handled that leave
 
+#### pending leaaves' students
 0x06 -> a list of students whose leaves are pending
 
     - Each time a student applies for a leave, his address will be stored here.
@@ -40,7 +44,7 @@ address: cosmos1mmk3jg09e6l9w0y5czvk2eesesky2u4u4enghv
   type: local
 
 
-### Addresses
+### example Addresses
 
 - address: cosmos1dtg0z3k30fy5tqght7w49kfc6pezlffus5jl0v
   name: abcd
@@ -72,7 +76,7 @@ address: cosmos1mmk3jg09e6l9w0y5czvk2eesesky2u4u4enghv
   type: local
 
 
-### Commands
+### Example Commands
 
 #### Transactions
 
