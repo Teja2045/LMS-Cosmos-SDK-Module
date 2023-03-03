@@ -1,6 +1,9 @@
 package types
 
 import (
+	//"lmsmodule/x/lms/types"
+	"time"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
@@ -12,9 +15,13 @@ var (
 	_ sdk.Msg = &MsgAcceptLeaveRequest{}
 )
 
-func NewMsgAddStudentRequest() *MsgAddStudentRequest {
+func NewMsgAddStudentRequest(adminAddress string, students []*Student, signer string) *MsgAddStudentRequest {
 
-	return &MsgAddStudentRequest{}
+	return &MsgAddStudentRequest{
+		Admin:         adminAddress,
+		Students:      students,
+		SignerAddress: signer,
+	}
 }
 
 func (msg MsgAddStudentRequest) ValidateBasic() error {
@@ -22,11 +29,15 @@ func (msg MsgAddStudentRequest) ValidateBasic() error {
 	if _, err := sdk.AccAddressFromBech32(eg); err != nil {
 		return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
 	}
+
+	if len(msg.Students) == 0 {
+		return ErrNoNewStudentToBeAdded
+	}
 	return nil
 }
 
 func (msg MsgAddStudentRequest) GetSignBytes() []byte {
-	return []byte{}
+	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(&msg))
 }
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
@@ -38,21 +49,38 @@ func (msg MsgAddStudentRequest) GetSigners() []sdk.AccAddress {
 
 //_________________________________________________________________________________________
 
-func NewMsgApplyLeaveRequest() *MsgApplyLeaveRequest {
+func NewMsgApplyLeaveRequest(address string, reason string, from *time.Time, to *time.Time, signer string) *MsgApplyLeaveRequest {
 
-	return &MsgApplyLeaveRequest{}
+	return &MsgApplyLeaveRequest{
+		Address:       address,
+		Reason:        reason,
+		From:          from,
+		To:            to,
+		SignerAddress: signer,
+	}
 }
 
 func (msg MsgApplyLeaveRequest) ValidateBasic() error {
-	eg := msg.Address
-	if _, err := sdk.AccAddressFromBech32(eg); err != nil {
+	if _, err := sdk.AccAddressFromBech32(msg.Address); err != nil {
 		return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
+	}
+	if msg.Address == "" {
+		return ErrAdminDetailsNil
+	}
+	if msg.Reason == "" {
+		return ErrLeaveDetailsNil
+	}
+	if msg.From == nil {
+		return ErrLeaveDetailsNil
+	}
+	if msg.To == nil {
+		return ErrLeaveDetailsNil
 	}
 	return nil
 }
 
 func (msg MsgApplyLeaveRequest) GetSignBytes() []byte {
-	return []byte{}
+	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(&msg))
 }
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
@@ -73,15 +101,21 @@ func NewMsgRegisterAdminRequest(name string, address string) *MsgRegisterAdminRe
 }
 
 func (msg MsgRegisterAdminRequest) ValidateBasic() error {
-	eg := msg.Address
-	if _, err := sdk.AccAddressFromBech32(eg); err != nil {
+	if _, err := sdk.AccAddressFromBech32(msg.Address); err != nil {
 		return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
 	}
+	if msg.Address == "" {
+		return ErrAdminDetailsNil
+	}
+	if msg.Name == "" {
+		return ErrAdminNameNil
+	}
+
 	return nil
 }
 
 func (msg MsgRegisterAdminRequest) GetSignBytes() []byte {
-	return []byte{}
+	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(&msg))
 }
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
@@ -93,9 +127,14 @@ func (msg MsgRegisterAdminRequest) GetSigners() []sdk.AccAddress {
 
 //_________________________________________________________________________________________
 
-func NewMsgAcceptLeaveRequest() *MsgAcceptLeaveRequest {
+func NewMsgAcceptLeaveRequest(admin string, student string, status LeaveStatus, signer string) *MsgAcceptLeaveRequest {
 
-	return &MsgAcceptLeaveRequest{}
+	return &MsgAcceptLeaveRequest{
+		Admin:         admin,
+		Student:       student,
+		Status:        status,
+		SignerAddress: signer,
+	}
 }
 
 func (msg MsgAcceptLeaveRequest) ValidateBasic() error {
@@ -103,11 +142,15 @@ func (msg MsgAcceptLeaveRequest) ValidateBasic() error {
 	if _, err := sdk.AccAddressFromBech32(eg); err != nil {
 		return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
 	}
+
+	if msg.Student == "" {
+		return ErrStudentDetailsNil
+	}
 	return nil
 }
 
 func (msg MsgAcceptLeaveRequest) GetSignBytes() []byte {
-	return []byte{}
+	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(&msg))
 }
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.

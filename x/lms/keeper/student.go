@@ -9,19 +9,6 @@ import (
 )
 
 func (k Keeper) AddStudent(ctx sdk.Context, student *types.Student) error {
-	// if _, err := sdk.AccAddressFromBech32(student.Address); err != nil {
-	// 	log.Println(student.Address)
-	// 	fmt.Println("___here in admin register, error___")
-	// 	return types.ErrStudentAlreadyExists
-	// }
-
-	if student.Name == "" {
-		return types.ErrStudentNameNil
-	}
-
-	if student.Id == "" {
-		return types.ErrStudentIdNil
-	}
 
 	store := ctx.KVStore(k.storeKey)
 	val, err := k.cdc.Marshal(student)
@@ -48,14 +35,14 @@ func (k Keeper) GetStudent(ctx sdk.Context, studentaddress string) *types.Studen
 	return student
 }
 
-func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.Leave, error) {
+func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.LeaveStatusResponse, error) {
 	if _, err := sdk.AccAddressFromBech32(studentAddress); err != nil {
-		return types.Leave{}, err
+		return types.LeaveStatusResponse{}, err
 	}
 
 	store := ctx.KVStore(k.storeKey)
 	if store.Get(types.StudentStoreKey(studentAddress)) == nil {
-		return types.Leave{}, types.ErrStudentDoesNotExist
+		return types.LeaveStatusResponse{}, types.ErrStudentDoesNotExist
 	}
 
 	leaveIdInBytes := store.Get(types.LeaveCounterStoreKey(studentAddress))
@@ -66,34 +53,24 @@ func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.
 		leaveId, _ = strconv.Atoi(string(leaveIdInBytes))
 	}
 
-	//panic("yoooooooooooooooooooo")
-
 	// if a student never applied for a leave
 	if leaveId == 0 {
-
-		return types.Leave{}, types.ErrLeaveNeverApplied
+		return types.LeaveStatusResponse{}, types.ErrLeaveNeverApplied
 	}
 
-	//panic(fmt.Sprint(leaveId))
-
-	//panic("yoooooooooooooooooooo")
-
-	val := store.Get(types.LeaveStatusStoreKey(studentAddress, leaveId))
-	if val == nil {
-		return types.Leave{
-			Address: "no admin handled it yet",
-			Status:  false,
+	marshalledLeave := store.Get(types.LeaveStatusStoreKey(studentAddress, leaveId))
+	if marshalledLeave == nil {
+		return types.LeaveStatusResponse{
+			SignedBy: "no admin handled it yet",
+			Status:   types.LeaveStatus_STATUS_UNDEFINED,
 		}, nil
 	}
-	var leave types.MsgAcceptLeaveRequest
-	//panic(fmt.Sprint("yoooooooooooooooooooo", val))
-	k.cdc.Unmarshal(val, &leave)
-	//panic(fmt.Sprint("sdjhd", err))
+	var handledLeave types.MsgAcceptLeaveRequest
+	k.cdc.Unmarshal(marshalledLeave, &handledLeave)
 
-	res := types.Leave{
-		Address: leave.Admin,
-		Status:  true,
+	leaveStatus := types.LeaveStatusResponse{
+		SignedBy: handledLeave.Admin,
+		Status:   handledLeave.Status,
 	}
-	//panic(res)
-	return res, nil
+	return leaveStatus, nil
 }

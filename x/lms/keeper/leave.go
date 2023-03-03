@@ -9,9 +9,7 @@ import (
 )
 
 func (k Keeper) AddLeave(ctx sdk.Context, leave *types.MsgApplyLeaveRequest) error {
-	fmt.Println("coming to addLeave --------------->")
 	if _, err := sdk.AccAddressFromBech32(leave.Address); err != nil {
-		fmt.Println("___here in AddLeave, error___")
 		return err
 	}
 
@@ -26,13 +24,16 @@ func (k Keeper) AddLeave(ctx sdk.Context, leave *types.MsgApplyLeaveRequest) err
 	}
 
 	leaveid := store.Get(types.LeaveCounterStoreKey(leave.Address))
-	leaveId, _ := strconv.Atoi(string(leaveid))
-	//k.cdc.Unmarshal(leaveid, &ty)
+	leaveId, err := strconv.Atoi(string(leaveid))
+	if err != nil {
+		fmt.Println(err)
+	}
 	if leaveid == nil {
 		leaveId = 0
 	}
 
 	leaveId++
+
 	store.Set(types.LeaveCounterStoreKey(leave.Address), []byte(strconv.Itoa(leaveId)))
 
 	store.Set(types.LeaveStoreKey(leave.Address, leaveId), val)
@@ -48,6 +49,8 @@ func (k Keeper) AddLeave(ctx sdk.Context, leave *types.MsgApplyLeaveRequest) err
 	store.Set(types.PendingLeaveStudentsStoreKey(), EncodeList(pendingLeaveStudentList))
 	return nil
 }
+
+//----------------------------------------------------------------------
 
 func (k Keeper) GetLeave(ctx sdk.Context, studentAddress string) (*types.MsgApplyLeaveRequest, error) {
 	if _, err := sdk.AccAddressFromBech32(studentAddress); err != nil {

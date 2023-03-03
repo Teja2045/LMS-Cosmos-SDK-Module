@@ -1,7 +1,8 @@
 syntax="proto3";
 package lms.v1beta1;
 option go_package="x/lms/types";    
-import "google/api/annotations.proto" ;                                                                                                                                                                                                                                                                                                                                                                       
+import "google/api/annotations.proto" ;
+import "cosmos/lms/v1beta1/tx.proto";                                                                                                                                                                                                                                                                                                                                             
 service Query {
     
     //shows the list of leaves for admin
@@ -41,7 +42,8 @@ message LeaveStatusRequest {
 }
 
 message LeaveStatusResponse {
-    Leave leave = 1;
+    string signed_by = 1;
+    LeaveStatus status = 2; 
 }
 
 

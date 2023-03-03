@@ -28,8 +28,7 @@ var _ types.MsgServer = Keeper{}
 
 func (k Keeper) MsgRegisterAdmin(ctx context.Context, req *types.MsgRegisterAdminRequest) (*types.MsgRegisterAdminResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	k.AdminRegister(sdkctx, req)
-	return &types.MsgRegisterAdminResponse{}, nil
+	return &types.MsgRegisterAdminResponse{}, k.AdminRegister(sdkctx, req)
 }
 
 func (k Keeper) MsgAddStudent(ctx context.Context, req *types.MsgAddStudentRequest) (*types.MsgAddStudentResponse, error) {
@@ -43,14 +42,12 @@ func (k Keeper) MsgAddStudent(ctx context.Context, req *types.MsgAddStudentReque
 
 func (k Keeper) MsgApplyLeave(ctx context.Context, req *types.MsgApplyLeaveRequest) (*types.MsgApplyLeaveResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	k.AddLeave(sdkctx, req)
-	return &types.MsgApplyLeaveResponse{}, nil
+	return &types.MsgApplyLeaveResponse{}, k.AddLeave(sdkctx, req)
 }
 
 func (k Keeper) MsgAcceptLeave(ctx context.Context, req *types.MsgAcceptLeaveRequest) (*types.MsgAcceptLeaveResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	k.Accept(sdkctx, req.Student, req.Admin)
-	return &types.MsgAcceptLeaveResponse{}, nil
+	return &types.MsgAcceptLeaveResponse{}, k.Accept(sdkctx, req.Student, req.Admin)
 }
 
 // type msgServer struct {
