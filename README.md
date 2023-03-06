@@ -75,6 +75,22 @@ address: cosmos1mmk3jg09e6l9w0y5czvk2eesesky2u4u4enghv
   pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A1wxcdib/3exc0rpAjBhR10/uxpF7TKVXKLBBleM0YyI"}'
   type: local
 
+address: cosmos1smt2maj353hrcerc23r3am6dqjc0v83snxmkr7
+  name: admina
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A5WZ5x2Z8ENR9QJKUJUc8ULkAHqVAI1tR//RAhcTIpau"}'
+  type: local
+
+  address: cosmos17h0gpjkdgf565r3tcwlxc77x07k0hug40m3wnk
+  name: studenta
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A2nExIUzgyDFVCixrYRtCIOSghcVbUF8K5y4qbF1nKW7"}'
+  type: local
+
+  address: cosmos1vznegugh3pfkut6rmt0zhfx0es3gnl0cn5akvj
+  name: studentb
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A4swMVXQvHzhDIeQgEAV+e4P2Nb3iefRibumAP2V4r4l"}'
+  type: local
+
+
 
 ### Example Commands
 
@@ -94,6 +110,8 @@ cosmos1yevrejew5twcuwg4eaxc60hehy37cxqg23rshu
 ./simd tx lms ApplyLeave cosmos1yevrejew5twcuwg4eaxc60hehy37cxqg23rshu sick 2006-Jan-06 2006-Jan-06 cosmos1zr0c72rn26x5vndky3zyvmzf2mjswvpz3pm35n --from validator-key --chain-id testnet
 
 ./simd tx lms AcceptLeave cosmos1zr0c72rn26x5vndky3zyvmzf2mjswvpz3pm35n cosmos1yevrejew5twcuwg4eaxc60hehy37cxqg23rshu  cosmos1zr0c72rn26x5vndky3zyvmzf2mjswvpz3pm35n --from validator-key --chain-id testnet --broadcast-mode block
+
+
 
 
 #### Queries

@@ -28,27 +28,41 @@ var _ types.MsgServer = Keeper{}
 
 func (k Keeper) MsgRegisterAdmin(ctx context.Context, req *types.MsgRegisterAdminRequest) (*types.MsgRegisterAdminResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
+	//panic("____yooo__>")
 	return &types.MsgRegisterAdminResponse{}, k.AdminRegister(sdkctx, req)
 }
+
+//----------------------------------------------------------------------------
 
 func (k Keeper) MsgAddStudent(ctx context.Context, req *types.MsgAddStudentRequest) (*types.MsgAddStudentResponse, error) {
 
 	sdkctx := sdk.UnwrapSDKContext(ctx)
+	if k.CheckAdmin(sdkctx, req.Admin) {
+		return &types.MsgAddStudentResponse{}, types.ErrAdminDoesNotExist
+	}
 	for _, student := range req.Students {
 		k.AddStudent(sdkctx, student)
 	}
 	return &types.MsgAddStudentResponse{}, nil
 }
 
+//----------------------------------------------------------------------------
+
 func (k Keeper) MsgApplyLeave(ctx context.Context, req *types.MsgApplyLeaveRequest) (*types.MsgApplyLeaveResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
+	//fmt.Println("here...............")
+
 	return &types.MsgApplyLeaveResponse{}, k.AddLeave(sdkctx, req)
 }
+
+//----------------------------------------------------------------------------
 
 func (k Keeper) MsgAcceptLeave(ctx context.Context, req *types.MsgAcceptLeaveRequest) (*types.MsgAcceptLeaveResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
 	return &types.MsgAcceptLeaveResponse{}, k.Accept(sdkctx, req.Student, req.Admin)
 }
+
+//----------------------------------------------------------------------------
 
 // type msgServer struct {
 // 	Keeper

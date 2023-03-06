@@ -42,8 +42,8 @@ func (msg MsgAddStudentRequest) GetSignBytes() []byte {
 
 // GetSigners returns the expected signers for a MsgUpdateParams message.
 func (msg MsgAddStudentRequest) GetSigners() []sdk.AccAddress {
-	sign := msg.Admin
-	addr, _ := sdk.AccAddressFromBech32(sign)
+	// sign := msg.Admin
+	addr, _ := sdk.AccAddressFromBech32(msg.SignerAddress)
 	return []sdk.AccAddress{addr}
 }
 

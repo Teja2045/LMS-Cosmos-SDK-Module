@@ -3,35 +3,43 @@ package keeper
 import (
 	"fmt"
 	"lmsmodule/x/lms/types"
-	"log"
 	"strconv"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k Keeper) AdminRegister(ctx sdk.Context, req *types.MsgRegisterAdminRequest) error {
+func (k Keeper) AdminRegister(ctx sdk.Context, adminRequest *types.MsgRegisterAdminRequest) error {
 
 	store := ctx.KVStore(k.storeKey)
-	val, err := k.cdc.Marshal(req)
+	val, err := k.cdc.Marshal(adminRequest)
 	if err != nil {
 		return err
 	}
 
-	store.Set(types.AdminstoreKey(req.Address), val)
+	store.Set(types.AdminstoreKey(adminRequest.Address), val)
 	return nil
 }
 
-func (k Keeper) GetAdmin(ctx sdk.Context, req string) []byte {
+//----------------------------------------------------------------------------
 
-	// if the address is not cosmos address
-	if _, err := sdk.AccAddressFromBech32(req); err != nil {
-		log.Fatal(err)
-	}
+func (k Keeper) CheckAdmin(ctx sdk.Context, adminAddress string) bool {
 	store := ctx.KVStore(k.storeKey)
-	return store.Get(types.AdminstoreKey(req))
+	return store.Get(types.AdminstoreKey(adminAddress)) == nil
 }
 
-//----------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
+func (k Keeper) GetAdmin(ctx sdk.Context, adminAddress string) []byte {
+
+	// if the admin address is not registered
+	if k.CheckAdmin(ctx, adminAddress) {
+		return nil
+	}
+	store := ctx.KVStore(k.storeKey)
+	return store.Get(types.AdminstoreKey(adminAddress))
+}
+
+//-----------------------------------------------------------------------------
 
 func (k Keeper) Accept(ctx sdk.Context, studentAddress string, adminAddress string) error {
 
@@ -131,6 +139,8 @@ func (k Keeper) Reject(ctx sdk.Context, studentAddress string, adminAddress stri
 	}
 	return nil
 }
+
+//----------------------------------------------------------------------------
 
 func (k Keeper) ListPendingLeaveStudents(ctx sdk.Context, adminAddress string) ([]string, error) {
 	if _, err := sdk.AccAddressFromBech32(adminAddress); err != nil {

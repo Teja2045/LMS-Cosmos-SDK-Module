@@ -32,9 +32,10 @@ func GetTxCmd() *cobra.Command {
 // NewCmdRegisterAdmin creates a CLI command for MsgRegisterAdminRequest.
 func NewCmdRegisterAdmin() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "RegisterAdmin",
+		Use:   "RegisterAdmin [address] [name] [address]",
 		Short: "| address | Name | signer address |",
 		Long:  `registers admin`,
+		Args:  cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {

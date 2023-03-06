@@ -74,3 +74,16 @@ func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.
 	}
 	return leaveStatus, nil
 }
+
+func (k Keeper) GetStudents(ctx sdk.Context) []*types.Student {
+	store := ctx.KVStore(k.storeKey)
+
+	var students []*types.Student
+	itr := store.Iterator(types.StudentKey, nil)
+	for ; itr.Valid(); itr.Next() {
+		var student types.Student
+		k.cdc.Unmarshal(itr.Value(), &student)
+		students = append(students, &student)
+	}
+	return students
+}
