@@ -9,6 +9,10 @@ service Query {
     rpc ListLeaves(ListLeavesRequest) returns (ListLeavesResponse) {
         option (google.api.http).get   = "/cosmos/lms/v1beta1/adminaddress";
     };
+
+    rpc ListStudents(ListStudentsRequest) returns (ListStudentsResponse) {
+        option (google.api.http).get   = "/cosmos/lms/v1beta1/adminaddress";
+    };
     
     // show the status of the leave request for a student
     rpc LeaveStatus(LeaveStatusRequest) returns (LeaveStatusResponse) {
@@ -25,8 +29,16 @@ message ListLeavesRequest {
     string name = 2;
 }
 
+message ListStudentsRequest {
+    string address = 1;
+}
+
+message ListStudentsResponse {
+    repeated Student students = 1;
+}
+
 message ListLeavesResponse {
-    repeated Leave leaves = 1;
+    repeated MsgApplyLeaveRequest leaves = 1;
 }
 
 

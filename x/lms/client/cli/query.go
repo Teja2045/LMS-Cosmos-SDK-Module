@@ -23,6 +23,7 @@ func GetQueryCmd() *cobra.Command {
 	lmsQueryCmd.AddCommand(
 		GetCmdLeavetatus(),
 		GetCmdListLeaves(),
+		GetCmdListStudents(),
 	)
 	return lmsQueryCmd
 }
@@ -32,6 +33,7 @@ func GetCmdLeavetatus() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "LeaveStatus",
 		Short: "| student Address | student name |",
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -63,6 +65,7 @@ func GetCmdListLeaves() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "ListLeaves",
 		Short: "| admin Address | admin name |",
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -74,6 +77,31 @@ func GetCmdListLeaves() *cobra.Command {
 			}
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.ListLeaves(context.Background(), listLeavesRequest)
+			if err != nil {
+				return err
+			}
+			return clientCtx.PrintProto(res)
+		},
+	}
+	flags.AddQueryFlagsToCmd(cmd)
+	return cmd
+}
+
+func GetCmdListStudents() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "ListStudents",
+		Short: "| admin Address |",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientQueryContext(cmd)
+			if err != nil {
+				return err
+			}
+			listStudentRequest := &types.ListStudentsRequest{
+				Address: args[0],
+			}
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.ListStudents(context.Background(), listStudentRequest)
 			if err != nil {
 				return err
 			}

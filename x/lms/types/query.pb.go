@@ -82,15 +82,103 @@ func (m *ListLeavesRequest) GetName() string {
 	return ""
 }
 
+type ListStudentsRequest struct {
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (m *ListStudentsRequest) Reset()         { *m = ListStudentsRequest{} }
+func (m *ListStudentsRequest) String() string { return proto.CompactTextString(m) }
+func (*ListStudentsRequest) ProtoMessage()    {}
+func (*ListStudentsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4aaac713669af5ad, []int{1}
+}
+func (m *ListStudentsRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListStudentsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListStudentsRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListStudentsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListStudentsRequest.Merge(m, src)
+}
+func (m *ListStudentsRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListStudentsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListStudentsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListStudentsRequest proto.InternalMessageInfo
+
+func (m *ListStudentsRequest) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+type ListStudentsResponse struct {
+	Students []*Student `protobuf:"bytes,1,rep,name=students,proto3" json:"students,omitempty"`
+}
+
+func (m *ListStudentsResponse) Reset()         { *m = ListStudentsResponse{} }
+func (m *ListStudentsResponse) String() string { return proto.CompactTextString(m) }
+func (*ListStudentsResponse) ProtoMessage()    {}
+func (*ListStudentsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4aaac713669af5ad, []int{2}
+}
+func (m *ListStudentsResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListStudentsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListStudentsResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListStudentsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListStudentsResponse.Merge(m, src)
+}
+func (m *ListStudentsResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListStudentsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListStudentsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListStudentsResponse proto.InternalMessageInfo
+
+func (m *ListStudentsResponse) GetStudents() []*Student {
+	if m != nil {
+		return m.Students
+	}
+	return nil
+}
+
 type ListLeavesResponse struct {
-	Leaves []*Leave `protobuf:"bytes,1,rep,name=leaves,proto3" json:"leaves,omitempty"`
+	Leaves []*MsgApplyLeaveRequest `protobuf:"bytes,1,rep,name=leaves,proto3" json:"leaves,omitempty"`
 }
 
 func (m *ListLeavesResponse) Reset()         { *m = ListLeavesResponse{} }
 func (m *ListLeavesResponse) String() string { return proto.CompactTextString(m) }
 func (*ListLeavesResponse) ProtoMessage()    {}
 func (*ListLeavesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{1}
+	return fileDescriptor_4aaac713669af5ad, []int{3}
 }
 func (m *ListLeavesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -119,7 +207,7 @@ func (m *ListLeavesResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListLeavesResponse proto.InternalMessageInfo
 
-func (m *ListLeavesResponse) GetLeaves() []*Leave {
+func (m *ListLeavesResponse) GetLeaves() []*MsgApplyLeaveRequest {
 	if m != nil {
 		return m.Leaves
 	}
@@ -137,7 +225,7 @@ func (m *LeaveStatusRequest) Reset()         { *m = LeaveStatusRequest{} }
 func (m *LeaveStatusRequest) String() string { return proto.CompactTextString(m) }
 func (*LeaveStatusRequest) ProtoMessage()    {}
 func (*LeaveStatusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{2}
+	return fileDescriptor_4aaac713669af5ad, []int{4}
 }
 func (m *LeaveStatusRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -189,7 +277,7 @@ func (m *LeaveStatusResponse) Reset()         { *m = LeaveStatusResponse{} }
 func (m *LeaveStatusResponse) String() string { return proto.CompactTextString(m) }
 func (*LeaveStatusResponse) ProtoMessage()    {}
 func (*LeaveStatusResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{3}
+	return fileDescriptor_4aaac713669af5ad, []int{5}
 }
 func (m *LeaveStatusResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -243,7 +331,7 @@ func (m *Leave) Reset()         { *m = Leave{} }
 func (m *Leave) String() string { return proto.CompactTextString(m) }
 func (*Leave) ProtoMessage()    {}
 func (*Leave) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{4}
+	return fileDescriptor_4aaac713669af5ad, []int{6}
 }
 func (m *Leave) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -295,6 +383,8 @@ func (m *Leave) GetStatus() bool {
 
 func init() {
 	proto.RegisterType((*ListLeavesRequest)(nil), "lms.v1beta1.ListLeavesRequest")
+	proto.RegisterType((*ListStudentsRequest)(nil), "lms.v1beta1.ListStudentsRequest")
+	proto.RegisterType((*ListStudentsResponse)(nil), "lms.v1beta1.ListStudentsResponse")
 	proto.RegisterType((*ListLeavesResponse)(nil), "lms.v1beta1.ListLeavesResponse")
 	proto.RegisterType((*LeaveStatusRequest)(nil), "lms.v1beta1.LeaveStatusRequest")
 	proto.RegisterType((*LeaveStatusResponse)(nil), "lms.v1beta1.LeaveStatusResponse")
@@ -304,32 +394,36 @@ func init() {
 func init() { proto.RegisterFile("cosmos/lms/v1beta1/query.proto", fileDescriptor_4aaac713669af5ad) }
 
 var fileDescriptor_4aaac713669af5ad = []byte{
-	// 391 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x92, 0xcd, 0xee, 0xd2, 0x40,
-	0x14, 0xc5, 0x19, 0x94, 0x0a, 0xb7, 0x89, 0x89, 0x63, 0x62, 0x1a, 0x30, 0x43, 0xd3, 0x68, 0xd2,
-	0xb0, 0x68, 0x05, 0x5f, 0x40, 0x59, 0xb3, 0x01, 0x77, 0x6e, 0xcc, 0x60, 0x27, 0xa4, 0x49, 0x3b,
-	0x53, 0x7a, 0xa7, 0x48, 0x13, 0x57, 0x3e, 0x81, 0x89, 0x2f, 0xe5, 0x92, 0xc4, 0x8d, 0x4b, 0x03,
-	0x3e, 0x87, 0x31, 0x4c, 0x87, 0x08, 0x0a, 0x2e, 0xfe, 0xbb, 0xce, 0xb9, 0xa7, 0xe7, 0xfc, 0xe6,
-	0x03, 0xd8, 0x7b, 0x85, 0xb9, 0xc2, 0x38, 0xcb, 0x31, 0xde, 0x8c, 0x97, 0x42, 0xf3, 0x71, 0xbc,
-	0xae, 0x44, 0x59, 0x47, 0x45, 0xa9, 0xb4, 0xa2, 0x6e, 0x96, 0x63, 0x64, 0x07, 0xfd, 0xa7, 0x2b,
-	0xa5, 0x56, 0x99, 0x88, 0x79, 0x91, 0xc6, 0x5c, 0x4a, 0xa5, 0xb9, 0x4e, 0x95, 0xc4, 0xc6, 0xda,
-	0x1f, 0x5c, 0x89, 0xd2, 0xdb, 0x66, 0x18, 0xbc, 0x86, 0x47, 0xb3, 0x14, 0xf5, 0x4c, 0xf0, 0x8d,
-	0xc0, 0x85, 0x58, 0x57, 0x02, 0x35, 0xf5, 0xe0, 0x01, 0x4f, 0x92, 0x52, 0x20, 0x7a, 0xc4, 0x27,
-	0x61, 0x6f, 0x71, 0x5a, 0x52, 0x0a, 0xf7, 0x25, 0xcf, 0x85, 0xd7, 0x36, 0xb2, 0xf9, 0x0e, 0x5e,
-	0x01, 0x3d, 0x8f, 0xc0, 0x42, 0x49, 0x14, 0x74, 0x04, 0x4e, 0x66, 0x14, 0x8f, 0xf8, 0xf7, 0x42,
-	0x77, 0x42, 0xa3, 0x33, 0xe2, 0xc8, 0x98, 0x17, 0xd6, 0x11, 0x4c, 0x81, 0x1a, 0xe1, 0x8d, 0xe6,
-	0xba, 0xba, 0x23, 0x45, 0x02, 0x8f, 0x2f, 0x32, 0x2c, 0xc6, 0x00, 0x7a, 0x98, 0xae, 0xa4, 0x48,
-	0xde, 0x2d, 0x6b, 0x1b, 0xd3, 0x6d, 0x84, 0x69, 0x4d, 0x5f, 0x80, 0x83, 0xc6, 0x6e, 0x92, 0x1e,
-	0x4e, 0xbc, 0x7f, 0x19, 0x6d, 0x9c, 0xf5, 0x05, 0x73, 0xe8, 0x18, 0xf9, 0x3f, 0x70, 0x4f, 0xc0,
-	0x29, 0x05, 0x47, 0x25, 0x2d, 0x9e, 0x5d, 0x1d, 0x75, 0x5b, 0xd6, 0xf1, 0x49, 0xd8, 0x3d, 0x45,
-	0x4e, 0x7e, 0x11, 0xe8, 0xcc, 0x8f, 0x37, 0x4b, 0x3f, 0x00, 0xfc, 0x39, 0x48, 0xca, 0x2e, 0x61,
-	0xfe, 0xbe, 0xa4, 0xfe, 0xf0, 0xe6, 0xbc, 0xd9, 0x7a, 0x10, 0x7e, 0xfa, 0xf6, 0xf3, 0x4b, 0x3b,
-	0xa0, 0x7e, 0x7c, 0xe5, 0x01, 0xf0, 0x24, 0x4f, 0xe5, 0x09, 0xf9, 0x23, 0xb8, 0x67, 0x9b, 0xa5,
-	0xc3, 0x9b, 0xc7, 0x60, 0xab, 0xfd, 0xdb, 0x06, 0xdb, 0x3d, 0x32, 0xdd, 0xcf, 0x68, 0x70, 0xad,
-	0x1b, 0x75, 0x95, 0x08, 0xa9, 0x6d, 0xfb, 0xf4, 0xf9, 0xd7, 0x3d, 0x23, 0xbb, 0x3d, 0x23, 0x3f,
-	0xf6, 0x8c, 0x7c, 0x3e, 0xb0, 0xd6, 0xee, 0xc0, 0x5a, 0xdf, 0x0f, 0xac, 0xf5, 0xd6, 0xdd, 0x9a,
-	0xff, 0x74, 0x5d, 0x08, 0x5c, 0x3a, 0xe6, 0xc1, 0xbe, 0xfc, 0x1d, 0x00, 0x00, 0xff, 0xff, 0xa9,
-	0x46, 0x57, 0x09, 0x1a, 0x03, 0x00, 0x00,
+	// 457 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0x41, 0x6b, 0x13, 0x41,
+	0x14, 0xc7, 0xb3, 0xd1, 0xc4, 0xf4, 0x45, 0x04, 0xa7, 0x45, 0x96, 0x54, 0xa6, 0xdb, 0x41, 0x21,
+	0x78, 0xc8, 0xb6, 0xf1, 0xe4, 0xb1, 0x39, 0x79, 0xa8, 0x48, 0xd3, 0x9b, 0x17, 0x99, 0xb8, 0x43,
+	0x58, 0xd8, 0x9d, 0xd9, 0xe6, 0xcd, 0xd6, 0x2e, 0xe8, 0xc5, 0x4f, 0x20, 0xf8, 0xa5, 0x3c, 0x16,
+	0xbc, 0x78, 0x94, 0xc4, 0xaf, 0x21, 0x48, 0x66, 0x5f, 0x74, 0xb7, 0x26, 0x11, 0xbd, 0x65, 0xfe,
+	0xf3, 0xde, 0xef, 0xff, 0x9f, 0x97, 0xb7, 0xc0, 0xdf, 0x18, 0x4c, 0x0d, 0x86, 0x49, 0x8a, 0xe1,
+	0xe5, 0xf1, 0x44, 0x59, 0x79, 0x1c, 0x5e, 0xe4, 0x6a, 0x56, 0x0c, 0xb2, 0x99, 0xb1, 0x86, 0x75,
+	0x93, 0x14, 0x07, 0x74, 0xd1, 0x7b, 0x38, 0x35, 0x66, 0x9a, 0xa8, 0x50, 0x66, 0x71, 0x28, 0xb5,
+	0x36, 0x56, 0xda, 0xd8, 0x68, 0x2c, 0x4b, 0x7b, 0xfb, 0x6b, 0x50, 0xf6, 0xaa, 0xbc, 0x14, 0x27,
+	0x70, 0xff, 0x34, 0x46, 0x7b, 0xaa, 0xe4, 0xa5, 0xc2, 0xb1, 0xba, 0xc8, 0x15, 0x5a, 0xe6, 0xc3,
+	0x1d, 0x19, 0x45, 0x33, 0x85, 0xe8, 0x7b, 0x81, 0xd7, 0xdf, 0x19, 0xaf, 0x8e, 0x8c, 0xc1, 0x6d,
+	0x2d, 0x53, 0xe5, 0x37, 0x9d, 0xec, 0x7e, 0x8b, 0x10, 0x76, 0x97, 0x88, 0x73, 0x9b, 0x47, 0x4a,
+	0xdb, 0xbf, 0x43, 0xc4, 0x73, 0xd8, 0xab, 0x37, 0x60, 0x66, 0x34, 0x2a, 0x76, 0x04, 0x1d, 0x24,
+	0xcd, 0xf7, 0x82, 0x5b, 0xfd, 0xee, 0x70, 0x6f, 0x50, 0x79, 0xe6, 0x80, 0x1a, 0xc6, 0xbf, 0xaa,
+	0xc4, 0x4b, 0x60, 0xd5, 0xf4, 0xc4, 0x79, 0x06, 0xed, 0xc4, 0x29, 0x44, 0x39, 0xac, 0x51, 0x5e,
+	0xe0, 0xf4, 0x24, 0xcb, 0x92, 0xc2, 0x35, 0x51, 0xd8, 0x31, 0x35, 0x88, 0x11, 0x30, 0xa7, 0x9f,
+	0x5b, 0x69, 0xf3, 0xff, 0x9c, 0x47, 0x04, 0xbb, 0x35, 0x06, 0xa5, 0xda, 0x87, 0x1d, 0x8c, 0xa7,
+	0x5a, 0x45, 0xaf, 0x27, 0x05, 0x61, 0x3a, 0xa5, 0x30, 0x2a, 0xd8, 0x11, 0xb4, 0xd1, 0x95, 0x3b,
+	0xd2, 0xbd, 0xa1, 0x5f, 0x8b, 0x5c, 0xc5, 0x51, 0x9d, 0x38, 0x83, 0x96, 0x93, 0xb7, 0x84, 0x7b,
+	0x00, 0xed, 0x99, 0x92, 0x68, 0x34, 0xc5, 0xa3, 0xd3, 0x52, 0x27, 0xb3, 0x56, 0xe0, 0xf5, 0x3b,
+	0x2b, 0xe4, 0xf0, 0x47, 0x13, 0x5a, 0x67, 0xcb, 0x1d, 0x63, 0x6f, 0x01, 0x7e, 0xcf, 0x95, 0xf1,
+	0x7a, 0x98, 0x9b, 0xeb, 0xd2, 0x3b, 0xd8, 0x78, 0x5f, 0x3e, 0x5d, 0xf4, 0x3f, 0x7c, 0xf9, 0xfe,
+	0xa9, 0x29, 0x58, 0x10, 0xae, 0x59, 0x45, 0x19, 0xa5, 0xb1, 0x5e, 0x45, 0x7e, 0x0f, 0x77, 0xab,
+	0xab, 0xc1, 0x82, 0x3f, 0xd0, 0x37, 0xd6, 0xac, 0x77, 0xb8, 0xa5, 0xe2, 0x9f, 0xed, 0xdf, 0x41,
+	0xb7, 0x32, 0x6b, 0x76, 0xb0, 0xf1, 0x5f, 0x20, 0xf3, 0x60, 0x73, 0x01, 0x79, 0x3f, 0x71, 0xde,
+	0x8f, 0x98, 0x58, 0xe7, 0x4d, 0x7b, 0x4c, 0xee, 0xa3, 0xc7, 0x9f, 0xe7, 0xdc, 0xbb, 0x9e, 0x73,
+	0xef, 0xdb, 0x9c, 0x7b, 0x1f, 0x17, 0xbc, 0x71, 0xbd, 0xe0, 0x8d, 0xaf, 0x0b, 0xde, 0x78, 0xd5,
+	0xbd, 0x72, 0x7d, 0xb6, 0xc8, 0x14, 0x4e, 0xda, 0xee, 0xcb, 0x7d, 0xfa, 0x33, 0x00, 0x00, 0xff,
+	0xff, 0x96, 0xce, 0x30, 0x24, 0x23, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -346,6 +440,7 @@ const _ = grpc.SupportPackageIsVersion4
 type QueryClient interface {
 	//shows the list of leaves for admin
 	ListLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error)
+	ListStudents(ctx context.Context, in *ListStudentsRequest, opts ...grpc.CallOption) (*ListStudentsResponse, error)
 	// show the status of the leave request for a student
 	LeaveStatus(ctx context.Context, in *LeaveStatusRequest, opts ...grpc.CallOption) (*LeaveStatusResponse, error)
 }
@@ -367,6 +462,15 @@ func (c *queryClient) ListLeaves(ctx context.Context, in *ListLeavesRequest, opt
 	return out, nil
 }
 
+func (c *queryClient) ListStudents(ctx context.Context, in *ListStudentsRequest, opts ...grpc.CallOption) (*ListStudentsResponse, error) {
+	out := new(ListStudentsResponse)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListStudents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *queryClient) LeaveStatus(ctx context.Context, in *LeaveStatusRequest, opts ...grpc.CallOption) (*LeaveStatusResponse, error) {
 	out := new(LeaveStatusResponse)
 	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/LeaveStatus", in, out, opts...)
@@ -380,6 +484,7 @@ func (c *queryClient) LeaveStatus(ctx context.Context, in *LeaveStatusRequest, o
 type QueryServer interface {
 	//shows the list of leaves for admin
 	ListLeaves(context.Context, *ListLeavesRequest) (*ListLeavesResponse, error)
+	ListStudents(context.Context, *ListStudentsRequest) (*ListStudentsResponse, error)
 	// show the status of the leave request for a student
 	LeaveStatus(context.Context, *LeaveStatusRequest) (*LeaveStatusResponse, error)
 }
@@ -390,6 +495,9 @@ type UnimplementedQueryServer struct {
 
 func (*UnimplementedQueryServer) ListLeaves(ctx context.Context, req *ListLeavesRequest) (*ListLeavesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLeaves not implemented")
+}
+func (*UnimplementedQueryServer) ListStudents(ctx context.Context, req *ListStudentsRequest) (*ListStudentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListStudents not implemented")
 }
 func (*UnimplementedQueryServer) LeaveStatus(ctx context.Context, req *LeaveStatusRequest) (*LeaveStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LeaveStatus not implemented")
@@ -413,6 +521,24 @@ func _Query_ListLeaves_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).ListLeaves(ctx, req.(*ListLeavesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListStudents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStudentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListStudents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/lms.v1beta1.Query/ListStudents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListStudents(ctx, req.(*ListStudentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -442,6 +568,10 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListLeaves",
 			Handler:    _Query_ListLeaves_Handler,
+		},
+		{
+			MethodName: "ListStudents",
+			Handler:    _Query_ListStudents_Handler,
 		},
 		{
 			MethodName: "LeaveStatus",
@@ -485,6 +615,73 @@ func (m *ListLeavesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListStudentsRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListStudentsRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListStudentsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListStudentsResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListStudentsResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListStudentsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Students) > 0 {
+		for iNdEx := len(m.Students) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Students[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
 	}
 	return len(dAtA) - i, nil
 }
@@ -669,6 +866,34 @@ func (m *ListLeavesRequest) Size() (n int) {
 	l = len(m.Name)
 	if l > 0 {
 		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *ListStudentsRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *ListStudentsResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Students) > 0 {
+		for _, e := range m.Students {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
 	}
 	return n
 }
@@ -861,6 +1086,172 @@ func (m *ListLeavesRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *ListStudentsRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListStudentsRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListStudentsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListStudentsResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListStudentsResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListStudentsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Students", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Students = append(m.Students, &Student{})
+			if err := m.Students[len(m.Students)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *ListLeavesResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -919,7 +1310,7 @@ func (m *ListLeavesResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Leaves = append(m.Leaves, &Leave{})
+			m.Leaves = append(m.Leaves, &MsgApplyLeaveRequest{})
 			if err := m.Leaves[len(m.Leaves)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

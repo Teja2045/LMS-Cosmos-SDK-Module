@@ -125,9 +125,9 @@ func NewCmdApplyLeave() *cobra.Command {
 func NewCmdAcceptLeave() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "AcceptLeave",
-		Short: "|student address|",
+		Short: "|student address| y(for accepted, anything else rejected) |",
 		Long:  `For admin to Accept a leave`,
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -135,11 +135,15 @@ func NewCmdAcceptLeave() *cobra.Command {
 			}
 
 			fromAddress := clientCtx.GetFromAddress().String()
+			status := types.LeaveStatus_STATUS_REJECTED
+			if args[1] == "y" {
+				status = types.LeaveStatus_STATUS_ACCEPTED
+			}
 
 			admin := types.MsgAcceptLeaveRequest{
 				Admin:         fromAddress,
 				Student:       args[0],
-				Status:        types.LeaveStatus_STATUS_ACCEPTED,
+				Status:        status,
 				SignerAddress: fromAddress,
 			}
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), &admin)

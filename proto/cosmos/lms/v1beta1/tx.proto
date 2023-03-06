@@ -73,9 +73,12 @@ message MsgAcceptLeaveRequest {
     // using it as student id, will accept his latest leave request if any
     string student = 2;
 
+
     LeaveStatus status = 3;
 
     string signerAddress = 4;
+    
+    bool accept = 5;
 }
 
 message MsgAcceptLeaveResponse {

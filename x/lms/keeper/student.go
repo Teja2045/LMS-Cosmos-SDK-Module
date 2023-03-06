@@ -85,11 +85,11 @@ func (k Keeper) GetStudents(ctx sdk.Context) []*types.Student {
 	store := ctx.KVStore(k.storeKey)
 
 	var students []*types.Student
-	itr := store.Iterator(types.StudentKey, nil)
+	itr := sdk.KVStorePrefixIterator(store, types.StudentKey)
 	for ; itr.Valid(); itr.Next() {
-		var student types.Student
-		k.cdc.Unmarshal(itr.Value(), &student)
-		students = append(students, &student)
+		var t types.Student
+		k.cdc.Unmarshal(itr.Value(), &t)
+		students = append(students, &t)
 	}
 	return students
 }
