@@ -32,20 +32,20 @@ func GetTxCmd() *cobra.Command {
 // NewCmdRegisterAdmin creates a CLI command for MsgRegisterAdminRequest.
 func NewCmdRegisterAdmin() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "RegisterAdmin [address] [name] [address]",
-		Short: "| address | Name | signer address |",
+		Use:   "RegisterAdmin [address] [name]",
+		Short: "| Name |",
 		Long:  `registers admin`,
-		Args:  cobra.ExactArgs(3),
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
-
+			fromAddress := clientCtx.GetFromAddress().String()
 			admin := types.MsgRegisterAdminRequest{
-				Address:       args[0],
-				Name:          args[1],
-				SignerAddress: args[2],
+				Address:       fromAddress,
+				Name:          args[0],
+				SignerAddress: fromAddress,
 			}
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), &admin)
 		},
@@ -59,27 +59,28 @@ func NewCmdRegisterAdmin() *cobra.Command {
 func NewCmdAddStudents() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "AddStudents",
-		Short: " | adminAddress | student1 | student2 | signeraddress | (student{address,name,id})",
+		Short: " | student1 | student2 |.... (student{address,name,id})",
 		Long:  `registers admin`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
-			adminAddress := args[0]
+			fromAddress := clientCtx.GetFromAddress().String()
+
 			students := []*types.Student{}
-			for i := 0; i < (len(args)-2)/3; i++ {
+			for i := 0; i < len(args)/3; i++ {
 				student := &types.Student{
-					Address: args[3*i+1],
-					Name:    args[3*i+2],
-					Id:      args[3*i+3],
+					Address: args[3*i],
+					Name:    args[3*i+1],
+					Id:      args[3*i+2],
 				}
 				students = append(students, student)
 			}
 			AddStudents := types.MsgAddStudentRequest{
-				Admin:         adminAddress,
+				Admin:         fromAddress,
 				Students:      students,
-				SignerAddress: args[len(args)-1],
+				SignerAddress: fromAddress,
 			}
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), &AddStudents)
 		},
@@ -93,22 +94,24 @@ func NewCmdAddStudents() *cobra.Command {
 func NewCmdApplyLeave() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "ApplyLeave",
-		Short: "| address | reason | signeraddress |",
+		Short: "| reason | from | to |",
 		Long:  `to apply leave`,
+		Args:  cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
+			fromAddress := clientCtx.GetFromAddress().String()
 			var format string = "2006-Jan-06"
-			from, _ := time.Parse(format, args[2])
-			to, _ := time.Parse(format, args[3])
+			from, _ := time.Parse(format, args[1])
+			to, _ := time.Parse(format, args[2])
 			applyleave := types.MsgApplyLeaveRequest{
-				Address:       args[0],
-				Reason:        args[1],
+				Address:       fromAddress,
+				Reason:        args[0],
 				From:          &from,
 				To:            &to,
-				SignerAddress: args[4],
+				SignerAddress: fromAddress,
 			}
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), &applyleave)
 		},
@@ -122,19 +125,22 @@ func NewCmdApplyLeave() *cobra.Command {
 func NewCmdAcceptLeave() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "AcceptLeave",
-		Short: "| admin address | student address | signer address |",
+		Short: "|student address|",
 		Long:  `For admin to Accept a leave`,
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
+			fromAddress := clientCtx.GetFromAddress().String()
+
 			admin := types.MsgAcceptLeaveRequest{
-				Admin:         args[0],
-				Student:       args[1],
+				Admin:         fromAddress,
+				Student:       args[0],
 				Status:        types.LeaveStatus_STATUS_ACCEPTED,
-				SignerAddress: args[2],
+				SignerAddress: fromAddress,
 			}
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), &admin)
 		},

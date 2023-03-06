@@ -24,6 +24,8 @@ func (k Keeper) AddStudent(ctx sdk.Context, student *types.Student) error {
 	return nil
 }
 
+//----------------------------------------------------------------------------
+
 func (k Keeper) GetStudent(ctx sdk.Context, studentaddress string) *types.Student {
 	if _, err := sdk.AccAddressFromBech32(studentaddress); err != nil {
 		log.Fatal(err)
@@ -34,6 +36,8 @@ func (k Keeper) GetStudent(ctx sdk.Context, studentaddress string) *types.Studen
 
 	return student
 }
+
+//----------------------------------------------------------------------------
 
 func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.LeaveStatusResponse, error) {
 	if _, err := sdk.AccAddressFromBech32(studentAddress); err != nil {
@@ -74,6 +78,8 @@ func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.
 	}
 	return leaveStatus, nil
 }
+
+//----------------------------------------------------------------------------
 
 func (k Keeper) GetStudents(ctx sdk.Context) []*types.Student {
 	store := ctx.KVStore(k.storeKey)
