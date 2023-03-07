@@ -32,10 +32,11 @@ func GetTxCmd() *cobra.Command {
 // NewCmdRegisterAdmin creates a CLI command for MsgRegisterAdminRequest.
 func NewCmdRegisterAdmin() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "RegisterAdmin [name]",
-		Short: "| Name |",
-		Long:  `registers admin`,
-		Args:  cobra.ExactArgs(1),
+		Use:     "register-admin [name]",
+		Short:   "registers an admin",
+		Long:    `registers an admin`,
+		Example: "./simd tx lms register-admin adminname --from adminaddress --chain-id testnet",
+		Args:    cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -58,9 +59,10 @@ func NewCmdRegisterAdmin() *cobra.Command {
 // NewCmdAddStudents creates a CLI command for MsgAddStudents.
 func NewCmdAddStudents() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "AddStudents [studentaddress] [studentname] [studentid] ...",
-		Short: " | student1 | student2 |.... (student{address,name,id})",
-		Long:  `registers admin`,
+		Use:     "add-students [studentaddress] [studentname] [studentid] ...",
+		Short:   "add students",
+		Long:    `add students`,
+		Example: "./simd tx lms add-students cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u saiteja 2045 --from adminaddress --chain-id testnet",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -93,10 +95,11 @@ func NewCmdAddStudents() *cobra.Command {
 // NewCmdApplyLeave creates a CLI command for MsgApplyLeave.
 func NewCmdApplyLeave() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "ApplyLeave [reason] [from] [to]",
-		Short: "| reason | from | to |",
-		Long:  `to apply leave`,
-		Args:  cobra.ExactArgs(3),
+		Use:     "apply-leave [reason] [from] [to]",
+		Short:   "to apply a leave",
+		Long:    `to apply a leave`,
+		Example: "./simd tx lms apply-leave sick 12-Jan-2022 13-Jan-2022 --from studentaddress --chain-id testnet",
+		Args:    cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -124,10 +127,11 @@ func NewCmdApplyLeave() *cobra.Command {
 // NewCmdAcceptLeave creates a CLI command for MsgAcceptLeave.
 func NewCmdAcceptLeave() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "AcceptLeave [student address] [y/n]",
-		Short: "|student address| y(for accepted, anything else rejected) |",
-		Long:  `For admin to Accept a leave`,
-		Args:  cobra.ExactArgs(2),
+		Use:     "accept-leave [student address] [y/n]",
+		Short:   "For admin to Accept a leave",
+		Long:    `For admin to Accept a leave`,
+		Example: "./simd tx lms accept-leave cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u --from adminaddress --chain-id testnet",
+		Args:    cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {

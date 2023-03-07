@@ -31,9 +31,10 @@ func GetQueryCmd() *cobra.Command {
 // GetCmdcheckStatus return status of a leave for a student.
 func GetCmdLeavetatus() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "LeaveStatus",
-		Short: "| student Address | student name |",
-		Args:  cobra.ExactArgs(2),
+		Use:     "leave-status [student address] [student name]",
+		Short:   "retrieves if the last applied leave's status",
+		Long:    `retrieves if the last applied leave's status`,
+		Example: "./simd query lms leave-status cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u studentname",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -44,13 +45,9 @@ func GetCmdLeavetatus() *cobra.Command {
 				Name:    args[1],
 			}
 
-			//fmt.Println("args", args)
-			//fmt.Println(leaveStatusRequest)
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.LeaveStatus(context.Background(), leaveStatusRequest)
-			//fmt.Println("err", err)
 			if err != nil {
-				//fmt.Println("here in client", "\n", "error: ", err, "\n", "res: ", res)
 				return err
 			}
 			return clientCtx.PrintProto(res)
@@ -63,9 +60,9 @@ func GetCmdLeavetatus() *cobra.Command {
 // GetCmdListLeaves returns list of leaves that are still pending.
 func GetCmdListLeaves() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "ListLeaves",
-		Short: "| admin Address | admin name |",
-		Args:  cobra.ExactArgs(2),
+		Use:     "list-pending-leaves [admin adress] [admin name]",
+		Short:   "list out the pending leaves",
+		Example: "./simd query lms list-pending-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -89,9 +86,11 @@ func GetCmdListLeaves() *cobra.Command {
 
 func GetCmdListStudents() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "ListStudents",
-		Short: "| admin Address |",
-		Args:  cobra.ExactArgs(1),
+		Use:     "list-students",
+		Short:   "listout all the students",
+		Long:    `listout all the students for admin`,
+		Example: "./simd query lms list-students cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu",
+		Args:    cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
