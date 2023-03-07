@@ -32,7 +32,7 @@ func GetTxCmd() *cobra.Command {
 // NewCmdRegisterAdmin creates a CLI command for MsgRegisterAdminRequest.
 func NewCmdRegisterAdmin() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "RegisterAdmin [address] [name]",
+		Use:   "RegisterAdmin [name]",
 		Short: "| Name |",
 		Long:  `registers admin`,
 		Args:  cobra.ExactArgs(1),
@@ -58,7 +58,7 @@ func NewCmdRegisterAdmin() *cobra.Command {
 // NewCmdAddStudents creates a CLI command for MsgAddStudents.
 func NewCmdAddStudents() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "AddStudents",
+		Use:   "AddStudents [studentaddress] [studentname] [studentid] ...",
 		Short: " | student1 | student2 |.... (student{address,name,id})",
 		Long:  `registers admin`,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -93,7 +93,7 @@ func NewCmdAddStudents() *cobra.Command {
 // NewCmdApplyLeave creates a CLI command for MsgApplyLeave.
 func NewCmdApplyLeave() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "ApplyLeave",
+		Use:   "ApplyLeave [reason] [from] [to]",
 		Short: "| reason | from | to |",
 		Long:  `to apply leave`,
 		Args:  cobra.ExactArgs(3),
@@ -124,7 +124,7 @@ func NewCmdApplyLeave() *cobra.Command {
 // NewCmdAcceptLeave creates a CLI command for MsgAcceptLeave.
 func NewCmdAcceptLeave() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "AcceptLeave",
+		Use:   "AcceptLeave [student address] [y/n]",
 		Short: "|student address| y(for accepted, anything else rejected) |",
 		Long:  `For admin to Accept a leave`,
 		Args:  cobra.ExactArgs(2),

@@ -120,19 +120,19 @@ func (am AppModule) LegacyQuerierHandler(legacyQuerierCdc *codec.LegacyAmino) sd
 // InitGenesis performs genesis initialization for the nft module. It returns
 // no validator updates.
 func (am AppModule) InitGenesis(ctx sdk.Context, cdc codec.JSONCodec, data json.RawMessage) []abci.ValidatorUpdate {
-	// var genesisState types.GenesisState
-	// cdc.MustUnmarshalJSON(data, &genesisState)
-	// am.studentkeeper.InitGenesis(ctx, &genesisState)
-	// return []abci.ValidatorUpdate{}
-	return nil
+	var genesisState types.GenesisState
+	cdc.MustUnmarshalJSON(data, &genesisState)
+	am.studentkeeper.InitGenesis(ctx, &genesisState)
+	return []abci.ValidatorUpdate{}
+	//return nil
 }
 
 // ExportGenesis returns the exported genesis state as raw bytes for the nft
 // module.
 func (am AppModule) ExportGenesis(ctx sdk.Context, cdc codec.JSONCodec) json.RawMessage {
-	// gs := am.studentkeeper.ExportGenesis(ctx)
-	// return cdc.MustMarshalJSON(gs)
-	return nil
+	gs := am.studentkeeper.ExportGenesis(ctx)
+	return cdc.MustMarshalJSON(gs)
+	//return nil
 }
 
 // ConsensusVersion implements AppModule/ConsensusVersion.
