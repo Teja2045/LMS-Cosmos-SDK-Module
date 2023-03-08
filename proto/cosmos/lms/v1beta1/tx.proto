@@ -59,7 +59,7 @@ message MsgApplyLeaveResponse {
 }
 
 enum LeaveStatus {
-    STATUS_UNDEFINED = 0;
+    STATUS_PENDING = 0;
     
     STATUS_ACCEPTED = 1;
     
@@ -78,7 +78,6 @@ message MsgAcceptLeaveRequest {
 
     string signerAddress = 4;
     
-    bool accept = 5;
 }
 
 message MsgAcceptLeaveResponse {

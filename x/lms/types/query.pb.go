@@ -82,6 +82,95 @@ func (m *ListLeavesRequest) GetName() string {
 	return ""
 }
 
+type ListHandledLeavesRequest struct {
+	// address is the account address of the admin.
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (m *ListHandledLeavesRequest) Reset()         { *m = ListHandledLeavesRequest{} }
+func (m *ListHandledLeavesRequest) String() string { return proto.CompactTextString(m) }
+func (*ListHandledLeavesRequest) ProtoMessage()    {}
+func (*ListHandledLeavesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4aaac713669af5ad, []int{1}
+}
+func (m *ListHandledLeavesRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListHandledLeavesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListHandledLeavesRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListHandledLeavesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListHandledLeavesRequest.Merge(m, src)
+}
+func (m *ListHandledLeavesRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListHandledLeavesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListHandledLeavesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListHandledLeavesRequest proto.InternalMessageInfo
+
+func (m *ListHandledLeavesRequest) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+type ListHandledLeavesResponse struct {
+	Leaves []*MsgAcceptLeaveRequest `protobuf:"bytes,1,rep,name=leaves,proto3" json:"leaves,omitempty"`
+}
+
+func (m *ListHandledLeavesResponse) Reset()         { *m = ListHandledLeavesResponse{} }
+func (m *ListHandledLeavesResponse) String() string { return proto.CompactTextString(m) }
+func (*ListHandledLeavesResponse) ProtoMessage()    {}
+func (*ListHandledLeavesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4aaac713669af5ad, []int{2}
+}
+func (m *ListHandledLeavesResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListHandledLeavesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListHandledLeavesResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListHandledLeavesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListHandledLeavesResponse.Merge(m, src)
+}
+func (m *ListHandledLeavesResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListHandledLeavesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListHandledLeavesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListHandledLeavesResponse proto.InternalMessageInfo
+
+func (m *ListHandledLeavesResponse) GetLeaves() []*MsgAcceptLeaveRequest {
+	if m != nil {
+		return m.Leaves
+	}
+	return nil
+}
+
 type ListStudentsRequest struct {
 	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 }
@@ -90,7 +179,7 @@ func (m *ListStudentsRequest) Reset()         { *m = ListStudentsRequest{} }
 func (m *ListStudentsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListStudentsRequest) ProtoMessage()    {}
 func (*ListStudentsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{1}
+	return fileDescriptor_4aaac713669af5ad, []int{3}
 }
 func (m *ListStudentsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -134,7 +223,7 @@ func (m *ListStudentsResponse) Reset()         { *m = ListStudentsResponse{} }
 func (m *ListStudentsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListStudentsResponse) ProtoMessage()    {}
 func (*ListStudentsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{2}
+	return fileDescriptor_4aaac713669af5ad, []int{4}
 }
 func (m *ListStudentsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -178,7 +267,7 @@ func (m *ListLeavesResponse) Reset()         { *m = ListLeavesResponse{} }
 func (m *ListLeavesResponse) String() string { return proto.CompactTextString(m) }
 func (*ListLeavesResponse) ProtoMessage()    {}
 func (*ListLeavesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{3}
+	return fileDescriptor_4aaac713669af5ad, []int{5}
 }
 func (m *ListLeavesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -225,7 +314,7 @@ func (m *LeaveStatusRequest) Reset()         { *m = LeaveStatusRequest{} }
 func (m *LeaveStatusRequest) String() string { return proto.CompactTextString(m) }
 func (*LeaveStatusRequest) ProtoMessage()    {}
 func (*LeaveStatusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{4}
+	return fileDescriptor_4aaac713669af5ad, []int{6}
 }
 func (m *LeaveStatusRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -277,7 +366,7 @@ func (m *LeaveStatusResponse) Reset()         { *m = LeaveStatusResponse{} }
 func (m *LeaveStatusResponse) String() string { return proto.CompactTextString(m) }
 func (*LeaveStatusResponse) ProtoMessage()    {}
 func (*LeaveStatusResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{5}
+	return fileDescriptor_4aaac713669af5ad, []int{7}
 }
 func (m *LeaveStatusResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -317,7 +406,7 @@ func (m *LeaveStatusResponse) GetStatus() LeaveStatus {
 	if m != nil {
 		return m.Status
 	}
-	return LeaveStatus_STATUS_UNDEFINED
+	return LeaveStatus_STATUS_PENDING
 }
 
 type Leave struct {
@@ -331,7 +420,7 @@ func (m *Leave) Reset()         { *m = Leave{} }
 func (m *Leave) String() string { return proto.CompactTextString(m) }
 func (*Leave) ProtoMessage()    {}
 func (*Leave) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{6}
+	return fileDescriptor_4aaac713669af5ad, []int{8}
 }
 func (m *Leave) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -383,6 +472,8 @@ func (m *Leave) GetStatus() bool {
 
 func init() {
 	proto.RegisterType((*ListLeavesRequest)(nil), "lms.v1beta1.ListLeavesRequest")
+	proto.RegisterType((*ListHandledLeavesRequest)(nil), "lms.v1beta1.ListHandledLeavesRequest")
+	proto.RegisterType((*ListHandledLeavesResponse)(nil), "lms.v1beta1.ListHandledLeavesResponse")
 	proto.RegisterType((*ListStudentsRequest)(nil), "lms.v1beta1.ListStudentsRequest")
 	proto.RegisterType((*ListStudentsResponse)(nil), "lms.v1beta1.ListStudentsResponse")
 	proto.RegisterType((*ListLeavesResponse)(nil), "lms.v1beta1.ListLeavesResponse")
@@ -394,36 +485,41 @@ func init() {
 func init() { proto.RegisterFile("cosmos/lms/v1beta1/query.proto", fileDescriptor_4aaac713669af5ad) }
 
 var fileDescriptor_4aaac713669af5ad = []byte{
-	// 457 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0x41, 0x6b, 0x13, 0x41,
-	0x14, 0xc7, 0xb3, 0xd1, 0xc4, 0xf4, 0x45, 0x04, 0xa7, 0x45, 0x96, 0x54, 0xa6, 0xdb, 0x41, 0x21,
-	0x78, 0xc8, 0xb6, 0xf1, 0xe4, 0xb1, 0x39, 0x79, 0xa8, 0x48, 0xd3, 0x9b, 0x17, 0x99, 0xb8, 0x43,
-	0x58, 0xd8, 0x9d, 0xd9, 0xe6, 0xcd, 0xd6, 0x2e, 0xe8, 0xc5, 0x4f, 0x20, 0xf8, 0xa5, 0x3c, 0x16,
-	0xbc, 0x78, 0x94, 0xc4, 0xaf, 0x21, 0x48, 0x66, 0x5f, 0x74, 0xb7, 0x26, 0x11, 0xbd, 0x65, 0xfe,
-	0xf3, 0xde, 0xef, 0xff, 0x9f, 0x97, 0xb7, 0xc0, 0xdf, 0x18, 0x4c, 0x0d, 0x86, 0x49, 0x8a, 0xe1,
-	0xe5, 0xf1, 0x44, 0x59, 0x79, 0x1c, 0x5e, 0xe4, 0x6a, 0x56, 0x0c, 0xb2, 0x99, 0xb1, 0x86, 0x75,
-	0x93, 0x14, 0x07, 0x74, 0xd1, 0x7b, 0x38, 0x35, 0x66, 0x9a, 0xa8, 0x50, 0x66, 0x71, 0x28, 0xb5,
-	0x36, 0x56, 0xda, 0xd8, 0x68, 0x2c, 0x4b, 0x7b, 0xfb, 0x6b, 0x50, 0xf6, 0xaa, 0xbc, 0x14, 0x27,
-	0x70, 0xff, 0x34, 0x46, 0x7b, 0xaa, 0xe4, 0xa5, 0xc2, 0xb1, 0xba, 0xc8, 0x15, 0x5a, 0xe6, 0xc3,
-	0x1d, 0x19, 0x45, 0x33, 0x85, 0xe8, 0x7b, 0x81, 0xd7, 0xdf, 0x19, 0xaf, 0x8e, 0x8c, 0xc1, 0x6d,
-	0x2d, 0x53, 0xe5, 0x37, 0x9d, 0xec, 0x7e, 0x8b, 0x10, 0x76, 0x97, 0x88, 0x73, 0x9b, 0x47, 0x4a,
-	0xdb, 0xbf, 0x43, 0xc4, 0x73, 0xd8, 0xab, 0x37, 0x60, 0x66, 0x34, 0x2a, 0x76, 0x04, 0x1d, 0x24,
-	0xcd, 0xf7, 0x82, 0x5b, 0xfd, 0xee, 0x70, 0x6f, 0x50, 0x79, 0xe6, 0x80, 0x1a, 0xc6, 0xbf, 0xaa,
-	0xc4, 0x4b, 0x60, 0xd5, 0xf4, 0xc4, 0x79, 0x06, 0xed, 0xc4, 0x29, 0x44, 0x39, 0xac, 0x51, 0x5e,
-	0xe0, 0xf4, 0x24, 0xcb, 0x92, 0xc2, 0x35, 0x51, 0xd8, 0x31, 0x35, 0x88, 0x11, 0x30, 0xa7, 0x9f,
-	0x5b, 0x69, 0xf3, 0xff, 0x9c, 0x47, 0x04, 0xbb, 0x35, 0x06, 0xa5, 0xda, 0x87, 0x1d, 0x8c, 0xa7,
-	0x5a, 0x45, 0xaf, 0x27, 0x05, 0x61, 0x3a, 0xa5, 0x30, 0x2a, 0xd8, 0x11, 0xb4, 0xd1, 0x95, 0x3b,
-	0xd2, 0xbd, 0xa1, 0x5f, 0x8b, 0x5c, 0xc5, 0x51, 0x9d, 0x38, 0x83, 0x96, 0x93, 0xb7, 0x84, 0x7b,
-	0x00, 0xed, 0x99, 0x92, 0x68, 0x34, 0xc5, 0xa3, 0xd3, 0x52, 0x27, 0xb3, 0x56, 0xe0, 0xf5, 0x3b,
-	0x2b, 0xe4, 0xf0, 0x47, 0x13, 0x5a, 0x67, 0xcb, 0x1d, 0x63, 0x6f, 0x01, 0x7e, 0xcf, 0x95, 0xf1,
-	0x7a, 0x98, 0x9b, 0xeb, 0xd2, 0x3b, 0xd8, 0x78, 0x5f, 0x3e, 0x5d, 0xf4, 0x3f, 0x7c, 0xf9, 0xfe,
-	0xa9, 0x29, 0x58, 0x10, 0xae, 0x59, 0x45, 0x19, 0xa5, 0xb1, 0x5e, 0x45, 0x7e, 0x0f, 0x77, 0xab,
-	0xab, 0xc1, 0x82, 0x3f, 0xd0, 0x37, 0xd6, 0xac, 0x77, 0xb8, 0xa5, 0xe2, 0x9f, 0xed, 0xdf, 0x41,
-	0xb7, 0x32, 0x6b, 0x76, 0xb0, 0xf1, 0x5f, 0x20, 0xf3, 0x60, 0x73, 0x01, 0x79, 0x3f, 0x71, 0xde,
-	0x8f, 0x98, 0x58, 0xe7, 0x4d, 0x7b, 0x4c, 0xee, 0xa3, 0xc7, 0x9f, 0xe7, 0xdc, 0xbb, 0x9e, 0x73,
-	0xef, 0xdb, 0x9c, 0x7b, 0x1f, 0x17, 0xbc, 0x71, 0xbd, 0xe0, 0x8d, 0xaf, 0x0b, 0xde, 0x78, 0xd5,
-	0xbd, 0x72, 0x7d, 0xb6, 0xc8, 0x14, 0x4e, 0xda, 0xee, 0xcb, 0x7d, 0xfa, 0x33, 0x00, 0x00, 0xff,
-	0xff, 0x96, 0xce, 0x30, 0x24, 0x23, 0x04, 0x00, 0x00,
+	// 542 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x95, 0x31, 0x6f, 0xd3, 0x40,
+	0x14, 0xc7, 0xeb, 0x42, 0x4c, 0xfa, 0x82, 0x90, 0xb8, 0x16, 0x64, 0x5c, 0xe4, 0xba, 0x27, 0x8a,
+	0x22, 0x86, 0xb8, 0x0d, 0x2c, 0xb0, 0x25, 0x53, 0x87, 0x22, 0xa8, 0x3b, 0x20, 0xb1, 0xa0, 0x4b,
+	0x7c, 0xb2, 0x8c, 0xec, 0x3b, 0x37, 0x77, 0xa9, 0x6a, 0x09, 0x18, 0x98, 0x19, 0x2a, 0xf1, 0x69,
+	0xf8, 0x06, 0x8c, 0x95, 0x58, 0x18, 0x51, 0xc2, 0x07, 0x41, 0x3e, 0x5f, 0x90, 0x9d, 0x38, 0xa5,
+	0x65, 0xea, 0x96, 0x7b, 0xf7, 0xde, 0xff, 0xff, 0x7b, 0x97, 0xf7, 0x12, 0x70, 0x86, 0x5c, 0x24,
+	0x5c, 0x78, 0x71, 0x22, 0xbc, 0x93, 0xbd, 0x01, 0x95, 0x64, 0xcf, 0x3b, 0x1e, 0xd3, 0x51, 0xd6,
+	0x49, 0x47, 0x5c, 0x72, 0xd4, 0x8a, 0x13, 0xd1, 0xd1, 0x17, 0xf6, 0xc3, 0x90, 0xf3, 0x30, 0xa6,
+	0x1e, 0x49, 0x23, 0x8f, 0x30, 0xc6, 0x25, 0x91, 0x11, 0x67, 0xa2, 0x48, 0xb5, 0x37, 0x6b, 0xa4,
+	0xe4, 0x69, 0x71, 0x89, 0x7b, 0x70, 0xf7, 0x20, 0x12, 0xf2, 0x80, 0x92, 0x13, 0x2a, 0x7c, 0x7a,
+	0x3c, 0xa6, 0x42, 0x22, 0x0b, 0x6e, 0x91, 0x20, 0x18, 0x51, 0x21, 0x2c, 0xc3, 0x35, 0xda, 0x6b,
+	0xfe, 0xec, 0x88, 0x10, 0xdc, 0x64, 0x24, 0xa1, 0xd6, 0xaa, 0x0a, 0xab, 0xcf, 0xf8, 0x19, 0x58,
+	0xb9, 0xc4, 0x3e, 0x61, 0x41, 0x4c, 0x83, 0x4b, 0x2a, 0xe1, 0x37, 0xf0, 0xa0, 0xa6, 0x4a, 0xa4,
+	0x9c, 0x09, 0x8a, 0x5e, 0x80, 0x19, 0xab, 0x88, 0x65, 0xb8, 0x37, 0xda, 0xad, 0x2e, 0xee, 0x94,
+	0xda, 0xed, 0xbc, 0x14, 0x61, 0x6f, 0x38, 0xa4, 0x69, 0x41, 0xad, 0xad, 0x7c, 0x5d, 0x81, 0x3d,
+	0x58, 0xcf, 0x85, 0x8f, 0xe4, 0x38, 0xa0, 0x4c, 0x5e, 0x82, 0x64, 0x1f, 0x36, 0xaa, 0x05, 0x1a,
+	0x62, 0x17, 0x9a, 0x42, 0xc7, 0x34, 0xc6, 0x46, 0x05, 0x43, 0x17, 0xf8, 0x7f, 0xb3, 0xf0, 0x2b,
+	0x40, 0xe5, 0xc7, 0xd4, 0x3a, 0xcf, 0xe7, 0x9a, 0xd9, 0x5e, 0x68, 0x26, 0x4d, 0xe3, 0xac, 0xb6,
+	0x97, 0x3e, 0x20, 0x15, 0x3f, 0x92, 0x44, 0x8e, 0xff, 0xf3, 0xeb, 0x09, 0x60, 0xbd, 0xa2, 0xa1,
+	0xa9, 0x36, 0x61, 0x4d, 0x44, 0x21, 0xa3, 0xc1, 0xbb, 0x41, 0xa6, 0x65, 0x9a, 0x45, 0xa0, 0x9f,
+	0xa1, 0x5d, 0x30, 0x85, 0x4a, 0x57, 0x4a, 0x77, 0xba, 0x56, 0x05, 0xb9, 0x2c, 0xa7, 0xf3, 0xf0,
+	0x21, 0x34, 0x54, 0xf8, 0x02, 0xb8, 0xfb, 0x60, 0x8e, 0x28, 0x11, 0x9c, 0x69, 0x3c, 0x7d, 0xca,
+	0xe3, 0xda, 0xac, 0xe1, 0x1a, 0xed, 0xe6, 0x4c, 0xb2, 0xfb, 0xcd, 0x84, 0xc6, 0x61, 0x3e, 0xf2,
+	0xe8, 0x53, 0x31, 0xa4, 0xaf, 0x29, 0x0b, 0x22, 0x16, 0x16, 0xcf, 0x8b, 0x9c, 0x2a, 0xd3, 0xfc,
+	0x10, 0xdb, 0x5b, 0x4b, 0xef, 0x8b, 0x17, 0xc0, 0xed, 0xcf, 0x3f, 0x7e, 0x7f, 0x5d, 0xc5, 0xc8,
+	0xf5, 0x6a, 0x16, 0x84, 0x04, 0x49, 0xc4, 0x66, 0xe4, 0x1f, 0xe1, 0x76, 0x79, 0x42, 0x90, 0xbb,
+	0x20, 0x3d, 0x37, 0x6d, 0xf6, 0xf6, 0x05, 0x19, 0x57, 0xb6, 0xff, 0x62, 0x14, 0xfd, 0x57, 0x76,
+	0x05, 0xed, 0x2c, 0x58, 0xd4, 0x6d, 0xa0, 0xfd, 0xf8, 0x5f, 0x69, 0x57, 0xc6, 0x39, 0x33, 0xe0,
+	0x5e, 0xae, 0xd3, 0x8b, 0xe3, 0x62, 0x0d, 0xaf, 0x15, 0x92, 0x4f, 0xdf, 0xd3, 0xe1, 0x35, 0x40,
+	0xfa, 0x00, 0xad, 0xd2, 0x9e, 0xa0, 0xad, 0xa5, 0x1b, 0xa4, 0x09, 0xdc, 0xe5, 0x09, 0xda, 0xfb,
+	0x89, 0xf2, 0x7e, 0x84, 0x70, 0x9d, 0xb7, 0xfe, 0x0d, 0xd2, 0xee, 0xfd, 0x9d, 0xef, 0x13, 0xc7,
+	0x38, 0x9f, 0x38, 0xc6, 0xaf, 0x89, 0x63, 0x9c, 0x4d, 0x9d, 0x95, 0xf3, 0xa9, 0xb3, 0xf2, 0x73,
+	0xea, 0xac, 0xbc, 0x6d, 0x9d, 0xaa, 0x3a, 0x99, 0xa5, 0x54, 0x0c, 0x4c, 0xf5, 0x27, 0xf0, 0xf4,
+	0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x85, 0xc0, 0xa0, 0x8f, 0x6e, 0x06, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -439,8 +535,11 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
 	//shows the list of leaves for admin
-	ListLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error)
+	ListPendingLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error)
 	ListStudents(ctx context.Context, in *ListStudentsRequest, opts ...grpc.CallOption) (*ListStudentsResponse, error)
+	ListHandledLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error)
+	ListAllAcceptedLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error)
+	ListAllRejectedLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error)
 	// show the status of the leave request for a student
 	LeaveStatus(ctx context.Context, in *LeaveStatusRequest, opts ...grpc.CallOption) (*LeaveStatusResponse, error)
 }
@@ -453,9 +552,9 @@ func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 	return &queryClient{cc}
 }
 
-func (c *queryClient) ListLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error) {
+func (c *queryClient) ListPendingLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error) {
 	out := new(ListLeavesResponse)
-	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListLeaves", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListPendingLeaves", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -465,6 +564,33 @@ func (c *queryClient) ListLeaves(ctx context.Context, in *ListLeavesRequest, opt
 func (c *queryClient) ListStudents(ctx context.Context, in *ListStudentsRequest, opts ...grpc.CallOption) (*ListStudentsResponse, error) {
 	out := new(ListStudentsResponse)
 	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListStudents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListHandledLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error) {
+	out := new(ListHandledLeavesResponse)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListHandledLeaves", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListAllAcceptedLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error) {
+	out := new(ListHandledLeavesResponse)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListAllAcceptedLeaves", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListAllRejectedLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error) {
+	out := new(ListHandledLeavesResponse)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListAllRejectedLeaves", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -483,8 +609,11 @@ func (c *queryClient) LeaveStatus(ctx context.Context, in *LeaveStatusRequest, o
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	//shows the list of leaves for admin
-	ListLeaves(context.Context, *ListLeavesRequest) (*ListLeavesResponse, error)
+	ListPendingLeaves(context.Context, *ListLeavesRequest) (*ListLeavesResponse, error)
 	ListStudents(context.Context, *ListStudentsRequest) (*ListStudentsResponse, error)
+	ListHandledLeaves(context.Context, *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error)
+	ListAllAcceptedLeaves(context.Context, *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error)
+	ListAllRejectedLeaves(context.Context, *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error)
 	// show the status of the leave request for a student
 	LeaveStatus(context.Context, *LeaveStatusRequest) (*LeaveStatusResponse, error)
 }
@@ -493,11 +622,20 @@ type QueryServer interface {
 type UnimplementedQueryServer struct {
 }
 
-func (*UnimplementedQueryServer) ListLeaves(ctx context.Context, req *ListLeavesRequest) (*ListLeavesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListLeaves not implemented")
+func (*UnimplementedQueryServer) ListPendingLeaves(ctx context.Context, req *ListLeavesRequest) (*ListLeavesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPendingLeaves not implemented")
 }
 func (*UnimplementedQueryServer) ListStudents(ctx context.Context, req *ListStudentsRequest) (*ListStudentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListStudents not implemented")
+}
+func (*UnimplementedQueryServer) ListHandledLeaves(ctx context.Context, req *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListHandledLeaves not implemented")
+}
+func (*UnimplementedQueryServer) ListAllAcceptedLeaves(ctx context.Context, req *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllAcceptedLeaves not implemented")
+}
+func (*UnimplementedQueryServer) ListAllRejectedLeaves(ctx context.Context, req *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllRejectedLeaves not implemented")
 }
 func (*UnimplementedQueryServer) LeaveStatus(ctx context.Context, req *LeaveStatusRequest) (*LeaveStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LeaveStatus not implemented")
@@ -507,20 +645,20 @@ func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
 	s.RegisterService(&_Query_serviceDesc, srv)
 }
 
-func _Query_ListLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Query_ListPendingLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListLeavesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).ListLeaves(ctx, in)
+		return srv.(QueryServer).ListPendingLeaves(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/lms.v1beta1.Query/ListLeaves",
+		FullMethod: "/lms.v1beta1.Query/ListPendingLeaves",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ListLeaves(ctx, req.(*ListLeavesRequest))
+		return srv.(QueryServer).ListPendingLeaves(ctx, req.(*ListLeavesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -539,6 +677,60 @@ func _Query_ListStudents_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).ListStudents(ctx, req.(*ListStudentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListHandledLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHandledLeavesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListHandledLeaves(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/lms.v1beta1.Query/ListHandledLeaves",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListHandledLeaves(ctx, req.(*ListHandledLeavesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListAllAcceptedLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHandledLeavesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListAllAcceptedLeaves(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/lms.v1beta1.Query/ListAllAcceptedLeaves",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListAllAcceptedLeaves(ctx, req.(*ListHandledLeavesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListAllRejectedLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHandledLeavesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListAllRejectedLeaves(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/lms.v1beta1.Query/ListAllRejectedLeaves",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListAllRejectedLeaves(ctx, req.(*ListHandledLeavesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -566,12 +758,24 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListLeaves",
-			Handler:    _Query_ListLeaves_Handler,
+			MethodName: "ListPendingLeaves",
+			Handler:    _Query_ListPendingLeaves_Handler,
 		},
 		{
 			MethodName: "ListStudents",
 			Handler:    _Query_ListStudents_Handler,
+		},
+		{
+			MethodName: "ListHandledLeaves",
+			Handler:    _Query_ListHandledLeaves_Handler,
+		},
+		{
+			MethodName: "ListAllAcceptedLeaves",
+			Handler:    _Query_ListAllAcceptedLeaves_Handler,
+		},
+		{
+			MethodName: "ListAllRejectedLeaves",
+			Handler:    _Query_ListAllRejectedLeaves_Handler,
 		},
 		{
 			MethodName: "LeaveStatus",
@@ -615,6 +819,73 @@ func (m *ListLeavesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListHandledLeavesRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListHandledLeavesRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListHandledLeavesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListHandledLeavesResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListHandledLeavesResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListHandledLeavesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Leaves) > 0 {
+		for iNdEx := len(m.Leaves) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Leaves[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
 	}
 	return len(dAtA) - i, nil
 }
@@ -870,6 +1141,34 @@ func (m *ListLeavesRequest) Size() (n int) {
 	return n
 }
 
+func (m *ListHandledLeavesRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *ListHandledLeavesResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Leaves) > 0 {
+		for _, e := range m.Leaves {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	return n
+}
+
 func (m *ListStudentsRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -1064,6 +1363,172 @@ func (m *ListLeavesRequest) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListHandledLeavesRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListHandledLeavesRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListHandledLeavesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListHandledLeavesResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListHandledLeavesResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListHandledLeavesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Leaves", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Leaves = append(m.Leaves, &MsgAcceptLeaveRequest{})
+			if err := m.Leaves[len(m.Leaves)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

@@ -66,7 +66,7 @@ func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.
 	if marshalledLeave == nil {
 		return types.LeaveStatusResponse{
 			SignedBy: "no admin handled it yet",
-			Status:   types.LeaveStatus_STATUS_UNDEFINED,
+			Status:   types.LeaveStatus_STATUS_PENDING,
 		}, nil
 	}
 	var handledLeave types.MsgAcceptLeaveRequest

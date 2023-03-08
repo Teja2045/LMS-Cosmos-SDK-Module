@@ -6,14 +6,25 @@ import "cosmos/lms/v1beta1/tx.proto";
 service Query {
     
     //shows the list of leaves for admin
-    rpc ListLeaves(ListLeavesRequest) returns (ListLeavesResponse) {
+    rpc ListPendingLeaves(ListLeavesRequest) returns (ListLeavesResponse) {
         option (google.api.http).get   = "/cosmos/lms/v1beta1/adminaddress";
     };
 
     rpc ListStudents(ListStudentsRequest) returns (ListStudentsResponse) {
         option (google.api.http).get   = "/cosmos/lms/v1beta1/adminaddress";
     };
+
+    rpc ListHandledLeaves(ListHandledLeavesRequest) returns (ListHandledLeavesResponse) {
+        option (google.api.http).get   = "/cosmos/lms/v1beta1/adminaddress";
+    };
     
+    rpc ListAllAcceptedLeaves(ListHandledLeavesRequest) returns (ListHandledLeavesResponse) {
+        option (google.api.http).get   = "/cosmos/lms/v1beta1/adminaddress";
+    };
+
+    rpc ListAllRejectedLeaves(ListHandledLeavesRequest) returns (ListHandledLeavesResponse) {
+        option (google.api.http).get   = "/cosmos/lms/v1beta1/adminaddress";
+    };
     // show the status of the leave request for a student
     rpc LeaveStatus(LeaveStatusRequest) returns (LeaveStatusResponse) {
         option (google.api.http).get   = "/cosmos/lms/v1beta1/studentaddress";
@@ -29,9 +40,20 @@ message ListLeavesRequest {
     string name = 2;
 }
 
+message ListHandledLeavesRequest {
+    // address is the account address of the admin.
+    string address = 1;
+    
+}
+
+message ListHandledLeavesResponse {
+    repeated MsgAcceptLeaveRequest leaves = 1;
+}
+
 message ListStudentsRequest {
     string address = 1;
 }
+
 
 message ListStudentsResponse {
     repeated Student students = 1;

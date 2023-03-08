@@ -9,9 +9,9 @@ import (
 
 var _ types.QueryServer = Keeper{}
 
-func (k Keeper) ListLeaves(ctx context.Context, listLeavesRequest *types.ListLeavesRequest) (*types.ListLeavesResponse, error) {
+func (k Keeper) ListPendingLeaves(ctx context.Context, listLeavesRequest *types.ListLeavesRequest) (*types.ListLeavesResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	studentAddressList, error := k.ListPendingLeaveStudents(sdkctx, listLeavesRequest.Address)
+	studentAddressList, error := k.GetPendingLeaveStudents(sdkctx, listLeavesRequest.Address)
 	leaves := []*types.MsgApplyLeaveRequest{}
 	for _, studentAddress := range studentAddressList {
 		leave1, _ := k.GetLeave(sdkctx, studentAddress)
@@ -35,4 +35,25 @@ func (k Keeper) ListStudents(ctx context.Context, listStudentsRequest *types.Lis
 	}
 	students := k.GetStudents(sdkctx)
 	return &types.ListStudentsResponse{Students: students}, nil
+}
+
+func (k Keeper) ListHandledLeaves(ctx context.Context, listHandledLeavesRequest *types.ListHandledLeavesRequest) (*types.ListHandledLeavesResponse, error) {
+	sdkctx := sdk.UnwrapSDKContext(ctx)
+	leaves, error := k.GetHandledLeaves(sdkctx, listHandledLeavesRequest.Address)
+
+	return &types.ListHandledLeavesResponse{Leaves: leaves}, error
+}
+
+func (k Keeper) ListAllAcceptedLeaves(ctx context.Context, listHandledLeavesRequest *types.ListHandledLeavesRequest) (*types.ListHandledLeavesResponse, error) {
+	sdkctx := sdk.UnwrapSDKContext(ctx)
+	leaves, error := k.GetAllAcceptedLeaves(sdkctx, listHandledLeavesRequest.Address)
+
+	return &types.ListHandledLeavesResponse{Leaves: leaves}, error
+}
+
+func (k Keeper) ListAllRejectedLeaves(ctx context.Context, listHandledLeavesRequest *types.ListHandledLeavesRequest) (*types.ListHandledLeavesResponse, error) {
+	sdkctx := sdk.UnwrapSDKContext(ctx)
+	leaves, error := k.GetAllRejectedLeaves(sdkctx, listHandledLeavesRequest.Address)
+
+	return &types.ListHandledLeavesResponse{Leaves: leaves}, error
 }

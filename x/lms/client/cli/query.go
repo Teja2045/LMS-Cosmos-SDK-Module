@@ -22,8 +22,11 @@ func GetQueryCmd() *cobra.Command {
 
 	lmsQueryCmd.AddCommand(
 		GetCmdLeavetatus(),
-		GetCmdListLeaves(),
+		GetCmdListPendingLeaves(),
 		GetCmdListStudents(),
+		GetCmdListHandledLeaves(),
+		GetCmdListAllAcceptedLeaves(),
+		GetCmdListAllRejectedLeaves(),
 	)
 	return lmsQueryCmd
 }
@@ -57,8 +60,8 @@ func GetCmdLeavetatus() *cobra.Command {
 	return cmd
 }
 
-// GetCmdListLeaves returns list of leaves that are still pending.
-func GetCmdListLeaves() *cobra.Command {
+// GetCmdListPendingLeaves returns list of leaves that are still pending.
+func GetCmdListPendingLeaves() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "list-pending-leaves [admin adress] [admin name]",
 		Short:   "list out the pending leaves",
@@ -73,7 +76,7 @@ func GetCmdListLeaves() *cobra.Command {
 				Name:    args[1],
 			}
 			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.ListLeaves(context.Background(), listLeavesRequest)
+			res, err := queryClient.ListPendingLeaves(context.Background(), listLeavesRequest)
 			if err != nil {
 				return err
 			}
@@ -101,6 +104,84 @@ func GetCmdListStudents() *cobra.Command {
 			}
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.ListStudents(context.Background(), listStudentRequest)
+			if err != nil {
+				return err
+			}
+			return clientCtx.PrintProto(res)
+		},
+	}
+	flags.AddQueryFlagsToCmd(cmd)
+	return cmd
+}
+
+// GetCmdListHandledLeaves returns list of leaves that are handled by an admin.
+func GetCmdListHandledLeaves() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:     "list-handled-leaves [admin adress]",
+		Short:   "list out the handled leaves by that admin",
+		Example: "./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientQueryContext(cmd)
+			if err != nil {
+				return err
+			}
+			listHandledLeavesRequest := &types.ListHandledLeavesRequest{
+				Address: args[0],
+			}
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.ListHandledLeaves(context.Background(), listHandledLeavesRequest)
+			if err != nil {
+				return err
+			}
+			return clientCtx.PrintProto(res)
+		},
+	}
+	flags.AddQueryFlagsToCmd(cmd)
+	return cmd
+}
+
+// GetCmdListAllRejectedLeaves returns list of leaves that are rejected.
+func GetCmdListAllRejectedLeaves() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:     "list-rejected-leaves [admin adress]",
+		Short:   "list out the handled leaves by that admin",
+		Example: "./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientQueryContext(cmd)
+			if err != nil {
+				return err
+			}
+			listHandledLeavesRequest := &types.ListHandledLeavesRequest{
+				Address: args[0],
+			}
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.ListAllRejectedLeaves(context.Background(), listHandledLeavesRequest)
+			if err != nil {
+				return err
+			}
+			return clientCtx.PrintProto(res)
+		},
+	}
+	flags.AddQueryFlagsToCmd(cmd)
+	return cmd
+}
+
+// GetCmdAllAcceptedLeaves returns list of leaves that are accepted.
+func GetCmdListAllAcceptedLeaves() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:     "list-accepted-leaves [admin adress]",
+		Short:   "list out the handled leaves by that admin",
+		Example: "./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientQueryContext(cmd)
+			if err != nil {
+				return err
+			}
+			listHandledLeavesRequest := &types.ListHandledLeavesRequest{
+				Address: args[0],
+			}
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.ListAllAcceptedLeaves(context.Background(), listHandledLeavesRequest)
 			if err != nil {
 				return err
 			}

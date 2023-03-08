@@ -68,9 +68,10 @@ func (k Keeper) Accept(ctx sdk.Context, studentAddress string, adminAddress stri
 	}
 
 	leaveStatus := &types.MsgAcceptLeaveRequest{
-		Admin:   adminAddress,
-		Student: studentAddress,
-		Status:  types.LeaveStatus_STATUS_ACCEPTED,
+		Admin:         adminAddress,
+		Student:       studentAddress,
+		Status:        types.LeaveStatus_STATUS_ACCEPTED,
+		SignerAddress: adminAddress,
 	}
 
 	val, _ := k.cdc.Marshal(leaveStatus)
@@ -97,6 +98,7 @@ func (k Keeper) Accept(ctx sdk.Context, studentAddress string, adminAddress stri
 //----------------------------------------------------------------------------
 
 // reject is also very similar to accept method
+// not using this method
 func (k Keeper) Reject(ctx sdk.Context, studentAddress string, adminAddress string) error {
 	if _, err := sdk.AccAddressFromBech32(adminAddress); err != nil {
 		return err
@@ -142,7 +144,7 @@ func (k Keeper) Reject(ctx sdk.Context, studentAddress string, adminAddress stri
 
 //----------------------------------------------------------------------------
 
-func (k Keeper) ListPendingLeaveStudents(ctx sdk.Context, adminAddress string) ([]string, error) {
+func (k Keeper) GetPendingLeaveStudents(ctx sdk.Context, adminAddress string) ([]string, error) {
 	if _, err := sdk.AccAddressFromBech32(adminAddress); err != nil {
 		fmt.Println("___here in admin register, error___")
 		return []string{}, err
@@ -159,4 +161,94 @@ func (k Keeper) ListPendingLeaveStudents(ctx sdk.Context, adminAddress string) (
 	}
 	StudentAddressList := store.Get(types.PendingLeaveStudentsStoreKey())
 	return DecodeList(StudentAddressList), nil
+}
+
+//----------------------------------------------------------------------------
+
+func (k Keeper) GetHandledLeaves(ctx sdk.Context, adminAddress string) ([]*types.MsgAcceptLeaveRequest, error) {
+	if _, err := sdk.AccAddressFromBech32(adminAddress); err != nil {
+		fmt.Println("___here in admin register, error___")
+		return []*types.MsgAcceptLeaveRequest{}, err
+	}
+
+	if adminAddress == "" {
+		return []*types.MsgAcceptLeaveRequest{}, types.ErrAdminNameNil
+	}
+
+	store := ctx.KVStore(k.storeKey)
+
+	if store.Get(types.AdminstoreKey(adminAddress)) == nil {
+		return []*types.MsgAcceptLeaveRequest{}, types.ErrAdminDoesNotExist
+	}
+
+	var leaves []*types.MsgAcceptLeaveRequest
+	itr := sdk.KVStorePrefixIterator(store, types.LeaveStatusKey)
+	for ; itr.Valid(); itr.Next() {
+		var t types.MsgAcceptLeaveRequest
+		k.cdc.Unmarshal(itr.Value(), &t)
+		if t.Admin == adminAddress {
+			leaves = append(leaves, &t)
+		}
+	}
+	return leaves, nil
+}
+
+//----------------------------------------------------------------------------
+
+func (k Keeper) GetAllAcceptedLeaves(ctx sdk.Context, adminAddress string) ([]*types.MsgAcceptLeaveRequest, error) {
+	if _, err := sdk.AccAddressFromBech32(adminAddress); err != nil {
+		fmt.Println("___here in admin register, error___")
+		return []*types.MsgAcceptLeaveRequest{}, err
+	}
+
+	if adminAddress == "" {
+		return []*types.MsgAcceptLeaveRequest{}, types.ErrAdminNameNil
+	}
+
+	store := ctx.KVStore(k.storeKey)
+
+	if store.Get(types.AdminstoreKey(adminAddress)) == nil {
+		return []*types.MsgAcceptLeaveRequest{}, types.ErrAdminDoesNotExist
+	}
+
+	var leaves []*types.MsgAcceptLeaveRequest
+	itr := sdk.KVStorePrefixIterator(store, types.LeaveStatusKey)
+	for ; itr.Valid(); itr.Next() {
+		var t types.MsgAcceptLeaveRequest
+		k.cdc.Unmarshal(itr.Value(), &t)
+		if t.Status == types.LeaveStatus_STATUS_ACCEPTED {
+			leaves = append(leaves, &t)
+		}
+	}
+	return leaves, nil
+}
+
+//----------------------------------------------------------------------------
+
+func (k Keeper) GetAllRejectedLeaves(ctx sdk.Context, adminAddress string) ([]*types.MsgAcceptLeaveRequest, error) {
+	if _, err := sdk.AccAddressFromBech32(adminAddress); err != nil {
+		fmt.Println("___here in admin register, error___")
+		return []*types.MsgAcceptLeaveRequest{}, err
+	}
+
+	if adminAddress == "" {
+		return []*types.MsgAcceptLeaveRequest{}, types.ErrAdminNameNil
+	}
+
+	store := ctx.KVStore(k.storeKey)
+
+	if store.Get(types.AdminstoreKey(adminAddress)) == nil {
+		return []*types.MsgAcceptLeaveRequest{}, types.ErrAdminDoesNotExist
+	}
+
+	var leaves []*types.MsgAcceptLeaveRequest
+	itr := sdk.KVStorePrefixIterator(store, types.LeaveStatusKey)
+	for ; itr.Valid(); itr.Next() {
+		var t types.MsgAcceptLeaveRequest
+		k.cdc.Unmarshal(itr.Value(), &t)
+		if t.Status == types.LeaveStatus_STATUS_REJECTED {
+			leaves = append(leaves, &t)
+		}
+	}
+	return leaves, nil
 }
