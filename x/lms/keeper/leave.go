@@ -8,7 +8,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k Keeper) AddLeave(ctx sdk.Context, leave *types.MsgApplyLeaveRequest) error {
+func (k Keeper) AddLeave(ctx sdk.Context, leave *types.Leave) error {
 	if _, err := sdk.AccAddressFromBech32(leave.Address); err != nil {
 		return err
 	}
@@ -52,21 +52,21 @@ func (k Keeper) AddLeave(ctx sdk.Context, leave *types.MsgApplyLeaveRequest) err
 
 //----------------------------------------------------------------------
 
-func (k Keeper) GetLeave(ctx sdk.Context, studentAddress string) (*types.MsgApplyLeaveRequest, error) {
+func (k Keeper) GetLeave(ctx sdk.Context, studentAddress string) (*types.Leave, error) {
 	if _, err := sdk.AccAddressFromBech32(studentAddress); err != nil {
-		return &types.MsgApplyLeaveRequest{}, err
+		return &types.Leave{}, err
 	}
 	store := ctx.KVStore(k.storeKey)
 	if store.Get(types.StudentStoreKey(studentAddress)) == nil {
-		return &types.MsgApplyLeaveRequest{}, types.ErrStudentDoesNotExist
+		return &types.Leave{}, types.ErrStudentDoesNotExist
 	}
 	leaveId, _ := strconv.Atoi(string(store.Get(types.LeaveCounterStoreKey(studentAddress))))
 	if leaveId == 0 {
-		return &types.MsgApplyLeaveRequest{}, types.ErrLeaveNeverApplied
+		return &types.Leave{}, types.ErrLeaveNeverApplied
 	}
 
-	leave := &types.MsgApplyLeaveRequest{}
-	k.cdc.Unmarshal(store.Get(types.LeaveStoreKey(studentAddress, leaveId)), leave)
+	leave := types.Leave{}
+	k.cdc.Unmarshal(store.Get(types.LeaveStoreKey(studentAddress, leaveId)), &leave)
 	fmt.Println(studentAddress, " ", leave)
-	return leave, nil
+	return &leave, nil
 }

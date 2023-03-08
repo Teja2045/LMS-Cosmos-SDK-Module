@@ -110,10 +110,14 @@ func NewCmdApplyLeave() *cobra.Command {
 			from, _ := time.Parse(format, args[1])
 			to, _ := time.Parse(format, args[2])
 			applyleave := types.MsgApplyLeaveRequest{
-				Address:       fromAddress,
-				Reason:        args[0],
-				From:          &from,
-				To:            &to,
+				Leave: &types.Leave{
+					Address:   fromAddress,
+					Reason:    args[0],
+					From:      &from,
+					To:        &to,
+					HandledBy: "no one Hanlded it yet",
+					Status:    types.LeaveStatus_STATUS_PENDING,
+				},
 				SignerAddress: fromAddress,
 			}
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), &applyleave)

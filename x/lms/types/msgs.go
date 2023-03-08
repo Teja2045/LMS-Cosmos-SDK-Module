@@ -52,28 +52,32 @@ func (msg MsgAddStudentRequest) GetSigners() []sdk.AccAddress {
 func NewMsgApplyLeaveRequest(address string, reason string, from *time.Time, to *time.Time, signer string) *MsgApplyLeaveRequest {
 
 	return &MsgApplyLeaveRequest{
-		Address:       address,
-		Reason:        reason,
-		From:          from,
-		To:            to,
+		Leave: &Leave{
+			Address:   address,
+			Reason:    reason,
+			From:      from,
+			To:        to,
+			HandledBy: "No admin handled it yet",
+			Status:    LeaveStatus_STATUS_PENDING,
+		},
 		SignerAddress: signer,
 	}
 }
 
 func (msg MsgApplyLeaveRequest) ValidateBasic() error {
-	if _, err := sdk.AccAddressFromBech32(msg.Address); err != nil {
+	if _, err := sdk.AccAddressFromBech32(msg.SignerAddress); err != nil {
 		return sdkerrors.ErrInvalidAddress.Wrapf("invalid from address: %s", err)
 	}
-	if msg.Address == "" {
+	if msg.Leave.Address == "" {
 		return ErrAdminDetailsNil
 	}
-	if msg.Reason == "" {
+	if msg.Leave.Reason == "" {
 		return ErrLeaveDetailsNil
 	}
-	if msg.From == nil {
+	if msg.Leave.From == nil {
 		return ErrLeaveDetailsNil
 	}
-	if msg.To == nil {
+	if msg.Leave.To == nil {
 		return ErrLeaveDetailsNil
 	}
 	return nil

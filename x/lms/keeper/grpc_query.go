@@ -12,7 +12,7 @@ var _ types.QueryServer = Keeper{}
 func (k Keeper) ListPendingLeaves(ctx context.Context, listLeavesRequest *types.ListLeavesRequest) (*types.ListLeavesResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
 	studentAddressList, error := k.GetPendingLeaveStudents(sdkctx, listLeavesRequest.Address)
-	leaves := []*types.MsgApplyLeaveRequest{}
+	leaves := []*types.Leave{}
 	for _, studentAddress := range studentAddressList {
 		leave1, _ := k.GetLeave(sdkctx, studentAddress)
 		leaves = append(leaves, leave1)

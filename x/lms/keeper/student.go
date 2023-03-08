@@ -62,19 +62,13 @@ func (k Keeper) CheckLeaveStatus(ctx sdk.Context, studentAddress string) (types.
 		return types.LeaveStatusResponse{}, types.ErrLeaveNeverApplied
 	}
 
-	marshalledLeave := store.Get(types.LeaveStatusStoreKey(studentAddress, leaveId))
-	if marshalledLeave == nil {
-		return types.LeaveStatusResponse{
-			SignedBy: "no admin handled it yet",
-			Status:   types.LeaveStatus_STATUS_PENDING,
-		}, nil
-	}
-	var handledLeave types.MsgAcceptLeaveRequest
-	k.cdc.Unmarshal(marshalledLeave, &handledLeave)
+	marshalledLeave := store.Get(types.LeaveStoreKey(studentAddress, leaveId))
+	var unmarshalledLeave types.Leave
+	k.cdc.Unmarshal(marshalledLeave, &unmarshalledLeave)
 
 	leaveStatus := types.LeaveStatusResponse{
-		SignedBy: handledLeave.Admin,
-		Status:   handledLeave.Status,
+		SignedBy: unmarshalledLeave.HandledBy,
+		Status:   unmarshalledLeave.Status,
 	}
 	return leaveStatus, nil
 }

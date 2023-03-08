@@ -37,6 +37,7 @@ func GetCmdLeavetatus() *cobra.Command {
 		Use:     "leave-status [student address] [student name]",
 		Short:   "retrieves if the last applied leave's status",
 		Long:    `retrieves if the last applied leave's status`,
+		Args:    cobra.ExactArgs(2),
 		Example: "./simd query lms leave-status cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u studentname",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -65,6 +66,7 @@ func GetCmdListPendingLeaves() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "list-pending-leaves [admin adress] [admin name]",
 		Short:   "list out the pending leaves",
+		Args:    cobra.ExactArgs(2),
 		Example: "./simd query lms list-pending-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -92,8 +94,8 @@ func GetCmdListStudents() *cobra.Command {
 		Use:     "list-students",
 		Short:   "listout all the students",
 		Long:    `listout all the students for admin`,
-		Example: "./simd query lms list-students cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu",
 		Args:    cobra.ExactArgs(1),
+		Example: "./simd query lms list-students cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -119,6 +121,7 @@ func GetCmdListHandledLeaves() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "list-handled-leaves [admin adress]",
 		Short:   "list out the handled leaves by that admin",
+		Args:    cobra.ExactArgs(1),
 		Example: "./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -146,6 +149,7 @@ func GetCmdListAllRejectedLeaves() *cobra.Command {
 		Use:     "list-rejected-leaves [admin adress]",
 		Short:   "list out the handled leaves by that admin",
 		Example: "./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
+		Args:    cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -171,6 +175,7 @@ func GetCmdListAllAcceptedLeaves() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "list-accepted-leaves [admin adress]",
 		Short:   "list out the handled leaves by that admin",
+		Args:    cobra.ExactArgs(1),
 		Example: "./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)

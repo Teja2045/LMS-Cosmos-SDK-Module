@@ -26,21 +26,21 @@ var _ types.MsgServer = Keeper{}
 
 // func (k msgServer) mustEmbedUnimplementedMsgServer() {} when just used grpc protoc
 
-func (k Keeper) MsgRegisterAdmin(ctx context.Context, req *types.MsgRegisterAdminRequest) (*types.MsgRegisterAdminResponse, error) {
+func (k Keeper) MsgRegisterAdmin(ctx context.Context, registerAdminRequest *types.MsgRegisterAdminRequest) (*types.MsgRegisterAdminResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
 	//panic("____yooo__>")
-	return &types.MsgRegisterAdminResponse{}, k.AdminRegister(sdkctx, req)
+	return &types.MsgRegisterAdminResponse{}, k.AdminRegister(sdkctx, registerAdminRequest)
 }
 
 //----------------------------------------------------------------------------
 
-func (k Keeper) MsgAddStudent(ctx context.Context, req *types.MsgAddStudentRequest) (*types.MsgAddStudentResponse, error) {
+func (k Keeper) MsgAddStudent(ctx context.Context, addStudentRequest *types.MsgAddStudentRequest) (*types.MsgAddStudentResponse, error) {
 
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	if k.CheckAdmin(sdkctx, req.Admin) {
+	if k.CheckAdmin(sdkctx, addStudentRequest.Admin) {
 		return &types.MsgAddStudentResponse{}, types.ErrAdminDoesNotExist
 	}
-	for _, student := range req.Students {
+	for _, student := range addStudentRequest.Students {
 		k.AddStudent(sdkctx, student)
 	}
 	return &types.MsgAddStudentResponse{}, nil
@@ -48,18 +48,18 @@ func (k Keeper) MsgAddStudent(ctx context.Context, req *types.MsgAddStudentReque
 
 //----------------------------------------------------------------------------
 
-func (k Keeper) MsgApplyLeave(ctx context.Context, req *types.MsgApplyLeaveRequest) (*types.MsgApplyLeaveResponse, error) {
+func (k Keeper) MsgApplyLeave(ctx context.Context, applyLeaveRequest *types.MsgApplyLeaveRequest) (*types.MsgApplyLeaveResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
 	//fmt.Println("here...............")
 
-	return &types.MsgApplyLeaveResponse{}, k.AddLeave(sdkctx, req)
+	return &types.MsgApplyLeaveResponse{}, k.AddLeave(sdkctx, applyLeaveRequest.Leave)
 }
 
 //----------------------------------------------------------------------------
 
-func (k Keeper) MsgAcceptLeave(ctx context.Context, req *types.MsgAcceptLeaveRequest) (*types.MsgAcceptLeaveResponse, error) {
+func (k Keeper) MsgAcceptLeave(ctx context.Context, acceptLeaveRequest *types.MsgAcceptLeaveRequest) (*types.MsgAcceptLeaveResponse, error) {
 	sdkctx := sdk.UnwrapSDKContext(ctx)
-	return &types.MsgAcceptLeaveResponse{}, k.Accept(sdkctx, req.Student, req.Admin)
+	return &types.MsgAcceptLeaveResponse{}, k.Accept(sdkctx, acceptLeaveRequest.Student, acceptLeaveRequest.Admin, acceptLeaveRequest.Status)
 }
 
 //----------------------------------------------------------------------------

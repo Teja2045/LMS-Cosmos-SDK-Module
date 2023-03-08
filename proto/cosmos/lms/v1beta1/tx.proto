@@ -43,15 +43,9 @@ message MsgAddStudentResponse{}
 
 message MsgApplyLeaveRequest {
     
-    string address = 1;
-    
-    string reason = 2;
-    
-    google.protobuf.Timestamp from = 3 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
-     
-    google.protobuf.Timestamp to = 4 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
+    Leave leave = 1;
 
-    string signerAddress = 5;
+    string signerAddress = 2;
 }
 
 message MsgApplyLeaveResponse {
@@ -92,4 +86,20 @@ message Student {
     
     // id is a unique student id.
     string id = 3;
+}
+
+message Leave {
+    
+    string address = 1;
+    
+    string reason = 2;
+    
+    google.protobuf.Timestamp from = 3 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
+     
+    google.protobuf.Timestamp to = 4 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
+
+    string handled_by = 5;
+
+    LeaveStatus status = 6; 
+
 }

@@ -47,7 +47,7 @@ message ListHandledLeavesRequest {
 }
 
 message ListHandledLeavesResponse {
-    repeated MsgAcceptLeaveRequest leaves = 1;
+    repeated Leave leaves = 1;
 }
 
 message ListStudentsRequest {
@@ -60,7 +60,7 @@ message ListStudentsResponse {
 }
 
 message ListLeavesResponse {
-    repeated MsgApplyLeaveRequest leaves = 1;
+    repeated Leave leaves = 1;
 }
 
 
@@ -80,17 +80,3 @@ message LeaveStatusResponse {
     LeaveStatus status = 2; 
 }
 
-
-message Leave {
-    
-    // admin address
-    string address = 1;
-    
-    string reason = 2;
-    
-    // google.protobuf.Timestamp from = 3;
-    // 
-    // google.protobuf.Timestamp to = 4;
-
-    bool status = 5;
-}
