@@ -25,11 +25,6 @@
     - each time the student applies for a leave, his leave counter is updated, and combining studentaddress+counterNumber forms a unique key for leaves
 
 
-### Handled Leaves
- - ##### 0x05 | student address --> signed/handled leaves
-
-    - after admin handles(accept/reject) student's most recently applied leave, it will be stored here. These handled leaves also contains the info about the Admin who signed/ handled that leave
-
 ### Pending Leaves' Students
  - ##### 0x06 -> a list of students whose leaves are pending
 
@@ -57,43 +52,48 @@
 ### Local Testnet commands 
 
 #### To add keys
-
 - ./simd keys add s1 
 
 #### To initialise a testnet with a chain id "testnet"
-- ./simd init --chain-id testnet myvalidator
+  - ./simd init --chain-id testnet myvalidator
 
 #### To some money to accounts (keys above)
-- ./simd add-genesis-account validator-key 100000000000stake
+  - ./simd add-genesis-account validator-key 100000000000stake
 
 
 #### To add a validator (do a transaction)
-- ./simd gentx validator-key 1000000000stake --chain-id testnet
+  - ./simd gentx validator-key 1000000000stake --chain-id testnet
 
 #### Collect the transactions
-- ./simd collect-gentxs
+  - ./simd collect-gentxs
 
 #### Start the chain
-- ./simd start
+  - ./simd start
 
 
 ### Example Commands
 
 #### Transactions
 
-- ./simd tx lms add-students cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u saiteja 2045 --from adminaddress --chain-id testnet
+  - ./simd tx lms add-students cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u saiteja 2045 --from adminaddress --chain-id testnet
 
-- ./simd tx lms apply-leave sick 12-Jan-2022 13-Jan-2022 --from studentaddress --chain-id testnet
+  - ./simd tx lms apply-leave sick 12-Jan-2022 13-Jan-2022 --from studentaddress --chain-id testnet
 
-- ./simd tx lms register-admin adminname --from adminaddress --chain-id testnet
+  - ./simd tx lms register-admin adminname --from adminaddress --chain-id testnet
 
-- ./simd tx lms accept-leave cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u --from adminaddress --chain-id testnet
+  - ./simd tx lms accept-leave cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u --from adminaddress --chain-id testnet
 
 
 #### Queries
 
-- ./simd query lms leave-status cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u studentname
+  - ./simd query lms leave-status cosmos1flg656awzar09mhpayt5lmd4lzfwkcu9qzmr5u studentname
 
-- ./simd query lms list-pending-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname
+  - ./simd query lms list-pending-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname
 
- - ./simd query lms list-students cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu
+  - ./simd query lms list-students cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu
+
+  - ./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname
+
+  - ./simd query lms list-rejected-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu
+
+  - ./simd query lms list-accepted-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu
