@@ -148,7 +148,7 @@ func GetCmdListAllRejectedLeaves() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "list-rejected-leaves [admin adress]",
 		Short:   "list out the handled leaves by that admin",
-		Example: "./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
+		Example: "./simd query lms list-rejected-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu",
 		Args:    cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -176,7 +176,7 @@ func GetCmdListAllAcceptedLeaves() *cobra.Command {
 		Use:     "list-accepted-leaves [admin adress]",
 		Short:   "list out the handled leaves by that admin",
 		Args:    cobra.ExactArgs(1),
-		Example: "./simd query lms list-handled-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu adminname",
+		Example: "./simd query lms list-accepted-leaves cosmos15etl0x6q53zextm0jq2jfp5rcn54lp6ts0v0eu",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
