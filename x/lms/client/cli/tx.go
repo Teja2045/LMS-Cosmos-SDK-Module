@@ -106,7 +106,7 @@ func NewCmdApplyLeave() *cobra.Command {
 				return err
 			}
 			fromAddress := clientCtx.GetFromAddress().String()
-			var format string = "2006-Jan-06"
+			var format string = "02-Jan-2006"
 			from, _ := time.Parse(format, args[1])
 			to, _ := time.Parse(format, args[2])
 			applyleave := types.MsgApplyLeaveRequest{
