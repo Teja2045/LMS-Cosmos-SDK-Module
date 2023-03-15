@@ -96,7 +96,7 @@ NOTE : Use --home flag when using same binary
 - follow the below example
 
 ```
-global]
+[global]
 log_level = 'info'
 [mode]
 [mode.clients]
