@@ -233,7 +233,8 @@ NOTE : Lookout for id, keys, address
 #### config.toml
 - follow the below example
 
-[global]
+```
+[global]           
 log_level = 'info'
 [mode]
 [mode.clients]
@@ -285,6 +286,8 @@ max_gas = 10000000
 clock_drift = '5s'
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
+ 
+```
 
 NOTE : Lookout for id, keys, address, ip address
 
