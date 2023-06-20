@@ -82,6 +82,183 @@ func (m *ListLeavesRequest) GetName() string {
 	return ""
 }
 
+type ListHandledLeavesRequest struct {
+	// address is the account address of the admin.
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (m *ListHandledLeavesRequest) Reset()         { *m = ListHandledLeavesRequest{} }
+func (m *ListHandledLeavesRequest) String() string { return proto.CompactTextString(m) }
+func (*ListHandledLeavesRequest) ProtoMessage()    {}
+func (*ListHandledLeavesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4aaac713669af5ad, []int{1}
+}
+func (m *ListHandledLeavesRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListHandledLeavesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListHandledLeavesRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListHandledLeavesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListHandledLeavesRequest.Merge(m, src)
+}
+func (m *ListHandledLeavesRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListHandledLeavesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListHandledLeavesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListHandledLeavesRequest proto.InternalMessageInfo
+
+func (m *ListHandledLeavesRequest) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+type ListHandledLeavesResponse struct {
+	Leaves []*Leave `protobuf:"bytes,1,rep,name=leaves,proto3" json:"leaves,omitempty"`
+}
+
+func (m *ListHandledLeavesResponse) Reset()         { *m = ListHandledLeavesResponse{} }
+func (m *ListHandledLeavesResponse) String() string { return proto.CompactTextString(m) }
+func (*ListHandledLeavesResponse) ProtoMessage()    {}
+func (*ListHandledLeavesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4aaac713669af5ad, []int{2}
+}
+func (m *ListHandledLeavesResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListHandledLeavesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListHandledLeavesResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListHandledLeavesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListHandledLeavesResponse.Merge(m, src)
+}
+func (m *ListHandledLeavesResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListHandledLeavesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListHandledLeavesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListHandledLeavesResponse proto.InternalMessageInfo
+
+func (m *ListHandledLeavesResponse) GetLeaves() []*Leave {
+	if m != nil {
+		return m.Leaves
+	}
+	return nil
+}
+
+type ListStudentsRequest struct {
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (m *ListStudentsRequest) Reset()         { *m = ListStudentsRequest{} }
+func (m *ListStudentsRequest) String() string { return proto.CompactTextString(m) }
+func (*ListStudentsRequest) ProtoMessage()    {}
+func (*ListStudentsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4aaac713669af5ad, []int{3}
+}
+func (m *ListStudentsRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListStudentsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListStudentsRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListStudentsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListStudentsRequest.Merge(m, src)
+}
+func (m *ListStudentsRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListStudentsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListStudentsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListStudentsRequest proto.InternalMessageInfo
+
+func (m *ListStudentsRequest) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+type ListStudentsResponse struct {
+	Students []*Student `protobuf:"bytes,1,rep,name=students,proto3" json:"students,omitempty"`
+}
+
+func (m *ListStudentsResponse) Reset()         { *m = ListStudentsResponse{} }
+func (m *ListStudentsResponse) String() string { return proto.CompactTextString(m) }
+func (*ListStudentsResponse) ProtoMessage()    {}
+func (*ListStudentsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4aaac713669af5ad, []int{4}
+}
+func (m *ListStudentsResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListStudentsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListStudentsResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListStudentsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListStudentsResponse.Merge(m, src)
+}
+func (m *ListStudentsResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListStudentsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListStudentsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListStudentsResponse proto.InternalMessageInfo
+
+func (m *ListStudentsResponse) GetStudents() []*Student {
+	if m != nil {
+		return m.Students
+	}
+	return nil
+}
+
 type ListLeavesResponse struct {
 	Leaves []*Leave `protobuf:"bytes,1,rep,name=leaves,proto3" json:"leaves,omitempty"`
 }
@@ -90,7 +267,7 @@ func (m *ListLeavesResponse) Reset()         { *m = ListLeavesResponse{} }
 func (m *ListLeavesResponse) String() string { return proto.CompactTextString(m) }
 func (*ListLeavesResponse) ProtoMessage()    {}
 func (*ListLeavesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{1}
+	return fileDescriptor_4aaac713669af5ad, []int{5}
 }
 func (m *ListLeavesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -137,7 +314,7 @@ func (m *LeaveStatusRequest) Reset()         { *m = LeaveStatusRequest{} }
 func (m *LeaveStatusRequest) String() string { return proto.CompactTextString(m) }
 func (*LeaveStatusRequest) ProtoMessage()    {}
 func (*LeaveStatusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{2}
+	return fileDescriptor_4aaac713669af5ad, []int{6}
 }
 func (m *LeaveStatusRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -181,14 +358,15 @@ func (m *LeaveStatusRequest) GetName() string {
 }
 
 type LeaveStatusResponse struct {
-	Leave *Leave `protobuf:"bytes,1,opt,name=leave,proto3" json:"leave,omitempty"`
+	SignedBy string      `protobuf:"bytes,1,opt,name=signed_by,json=signedBy,proto3" json:"signed_by,omitempty"`
+	Status   LeaveStatus `protobuf:"varint,2,opt,name=status,proto3,enum=lms.v1beta1.LeaveStatus" json:"status,omitempty"`
 }
 
 func (m *LeaveStatusResponse) Reset()         { *m = LeaveStatusResponse{} }
 func (m *LeaveStatusResponse) String() string { return proto.CompactTextString(m) }
 func (*LeaveStatusResponse) ProtoMessage()    {}
 func (*LeaveStatusResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{3}
+	return fileDescriptor_4aaac713669af5ad, []int{7}
 }
 func (m *LeaveStatusResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -217,106 +395,66 @@ func (m *LeaveStatusResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_LeaveStatusResponse proto.InternalMessageInfo
 
-func (m *LeaveStatusResponse) GetLeave() *Leave {
+func (m *LeaveStatusResponse) GetSignedBy() string {
 	if m != nil {
-		return m.Leave
-	}
-	return nil
-}
-
-type Leave struct {
-	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
-	Reason  string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
-	Status  bool   `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"`
-}
-
-func (m *Leave) Reset()         { *m = Leave{} }
-func (m *Leave) String() string { return proto.CompactTextString(m) }
-func (*Leave) ProtoMessage()    {}
-func (*Leave) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4aaac713669af5ad, []int{4}
-}
-func (m *Leave) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Leave) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Leave.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Leave) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Leave.Merge(m, src)
-}
-func (m *Leave) XXX_Size() int {
-	return m.Size()
-}
-func (m *Leave) XXX_DiscardUnknown() {
-	xxx_messageInfo_Leave.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Leave proto.InternalMessageInfo
-
-func (m *Leave) GetAddress() string {
-	if m != nil {
-		return m.Address
+		return m.SignedBy
 	}
 	return ""
 }
 
-func (m *Leave) GetReason() string {
-	if m != nil {
-		return m.Reason
-	}
-	return ""
-}
-
-func (m *Leave) GetStatus() bool {
+func (m *LeaveStatusResponse) GetStatus() LeaveStatus {
 	if m != nil {
 		return m.Status
 	}
-	return false
+	return LeaveStatus_STATUS_PENDING
 }
 
 func init() {
-	proto.RegisterType((*ListLeavesRequest)(nil), "cosmos.lms.v1beta1.ListLeavesRequest")
-	proto.RegisterType((*ListLeavesResponse)(nil), "cosmos.lms.v1beta1.ListLeavesResponse")
-	proto.RegisterType((*LeaveStatusRequest)(nil), "cosmos.lms.v1beta1.LeaveStatusRequest")
-	proto.RegisterType((*LeaveStatusResponse)(nil), "cosmos.lms.v1beta1.LeaveStatusResponse")
-	proto.RegisterType((*Leave)(nil), "cosmos.lms.v1beta1.Leave")
+	proto.RegisterType((*ListLeavesRequest)(nil), "lms.v1beta1.ListLeavesRequest")
+	proto.RegisterType((*ListHandledLeavesRequest)(nil), "lms.v1beta1.ListHandledLeavesRequest")
+	proto.RegisterType((*ListHandledLeavesResponse)(nil), "lms.v1beta1.ListHandledLeavesResponse")
+	proto.RegisterType((*ListStudentsRequest)(nil), "lms.v1beta1.ListStudentsRequest")
+	proto.RegisterType((*ListStudentsResponse)(nil), "lms.v1beta1.ListStudentsResponse")
+	proto.RegisterType((*ListLeavesResponse)(nil), "lms.v1beta1.ListLeavesResponse")
+	proto.RegisterType((*LeaveStatusRequest)(nil), "lms.v1beta1.LeaveStatusRequest")
+	proto.RegisterType((*LeaveStatusResponse)(nil), "lms.v1beta1.LeaveStatusResponse")
 }
 
 func init() { proto.RegisterFile("cosmos/lms/v1beta1/query.proto", fileDescriptor_4aaac713669af5ad) }
 
 var fileDescriptor_4aaac713669af5ad = []byte{
-	// 335 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0x4d, 0x4f, 0xc2, 0x40,
-	0x10, 0xed, 0xaa, 0x45, 0x1d, 0x4e, 0xae, 0x89, 0xa9, 0xc4, 0x6c, 0x48, 0x13, 0x90, 0x53, 0x1b,
-	0xf0, 0x17, 0xc8, 0x41, 0x2f, 0x5c, 0xa8, 0x37, 0x13, 0x13, 0x17, 0x99, 0x10, 0x92, 0xb6, 0x5b,
-	0x3a, 0x0b, 0x91, 0x7f, 0xe1, 0xcf, 0xe2, 0xc8, 0xd1, 0xa3, 0x81, 0x3f, 0x62, 0xd8, 0x2e, 0x11,
-	0xfc, 0x80, 0xc4, 0xdb, 0xbe, 0xb7, 0x6f, 0xe7, 0xbd, 0x9d, 0x19, 0x10, 0x2f, 0x8a, 0x12, 0x45,
-	0x61, 0x9c, 0x50, 0x38, 0x69, 0xf6, 0x50, 0xcb, 0x66, 0x38, 0x1a, 0x63, 0x3e, 0x0d, 0xb2, 0x5c,
-	0x69, 0xc5, 0x79, 0x71, 0x1f, 0xc4, 0x09, 0x05, 0xf6, 0xbe, 0x72, 0x35, 0x50, 0x6a, 0x10, 0x63,
-	0x28, 0xb3, 0x61, 0x28, 0xd3, 0x54, 0x69, 0xa9, 0x87, 0x2a, 0xa5, 0xe2, 0x85, 0x7f, 0x0b, 0x67,
-	0x9d, 0x21, 0xe9, 0x0e, 0xca, 0x09, 0x52, 0x84, 0xa3, 0x31, 0x92, 0xe6, 0x1e, 0x1c, 0xcb, 0x7e,
-	0x3f, 0x47, 0x22, 0x8f, 0x55, 0x59, 0xe3, 0x34, 0x5a, 0x43, 0xce, 0xe1, 0x28, 0x95, 0x09, 0x7a,
-	0x07, 0x86, 0x36, 0x67, 0xff, 0x1e, 0xf8, 0x66, 0x09, 0xca, 0x54, 0x4a, 0xc8, 0x9b, 0x50, 0x8a,
-	0x0d, 0xe3, 0xb1, 0xea, 0x61, 0xa3, 0xdc, 0xba, 0x0c, 0x7e, 0x66, 0x0b, 0xcc, 0x9b, 0xc8, 0x0a,
-	0xfd, 0x36, 0x70, 0x43, 0x3c, 0x68, 0xa9, 0xc7, 0xff, 0x0c, 0x73, 0x07, 0xe7, 0x5b, 0x35, 0x6c,
-	0x9a, 0x10, 0x5c, 0x63, 0x62, 0x4a, 0xec, 0x0c, 0x53, 0xe8, 0xfc, 0x2e, 0xb8, 0x06, 0xef, 0xb0,
-	0xbf, 0x80, 0x52, 0x8e, 0x92, 0x54, 0x6a, 0x03, 0x58, 0xb4, 0xe2, 0xc9, 0xb8, 0x7b, 0x6e, 0x95,
-	0x35, 0x4e, 0x22, 0x8b, 0x5a, 0x33, 0x06, 0x6e, 0x77, 0x35, 0x2c, 0xfe, 0x04, 0xf0, 0xd5, 0x31,
-	0x5e, 0xfb, 0x35, 0xcc, 0xf7, 0xa1, 0x54, 0xea, 0xfb, 0x64, 0xc5, 0x57, 0x7d, 0x87, 0x3f, 0x43,
-	0x79, 0xa3, 0x07, 0xbc, 0xfe, 0xe7, 0x67, 0xb7, 0x1a, 0x5d, 0xb9, 0xde, 0xab, 0x5b, 0x3b, 0xb4,
-	0x6b, 0xb3, 0x85, 0x60, 0xf3, 0x85, 0x60, 0x1f, 0x0b, 0xc1, 0xde, 0x96, 0xc2, 0x99, 0x2f, 0x85,
-	0xf3, 0xbe, 0x14, 0xce, 0x63, 0xf9, 0xd5, 0x2c, 0xa7, 0x9e, 0x66, 0x48, 0xbd, 0x92, 0xd9, 0xb1,
-	0x9b, 0xcf, 0x00, 0x00, 0x00, 0xff, 0xff, 0xca, 0x71, 0x96, 0x93, 0xb7, 0x02, 0x00, 0x00,
+	// 493 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x54, 0xc1, 0x6e, 0xd3, 0x40,
+	0x10, 0x8d, 0x0b, 0x84, 0x76, 0x82, 0x90, 0xd8, 0x16, 0xc9, 0xb8, 0xc8, 0x35, 0x16, 0x45, 0x51,
+	0x0f, 0x71, 0x1b, 0xf8, 0x00, 0x92, 0x0b, 0x3d, 0xf4, 0x00, 0xee, 0x8d, 0x0b, 0xda, 0x64, 0x47,
+	0x91, 0x91, 0xbd, 0xeb, 0x66, 0x36, 0x55, 0x23, 0x01, 0x07, 0xce, 0x1c, 0x2a, 0xf1, 0x35, 0xfc,
+	0x01, 0xc7, 0x4a, 0x5c, 0x38, 0xa2, 0x84, 0x0f, 0x41, 0x59, 0x6f, 0x51, 0xdc, 0x38, 0xd0, 0xf6,
+	0xd4, 0x9b, 0x3d, 0xfb, 0xe6, 0xbd, 0x37, 0xe3, 0xe7, 0x05, 0xbf, 0xaf, 0x28, 0x53, 0x14, 0xa5,
+	0x19, 0x45, 0xc7, 0x7b, 0x3d, 0xd4, 0x7c, 0x2f, 0x3a, 0x1a, 0xe1, 0x70, 0xdc, 0xca, 0x87, 0x4a,
+	0x2b, 0xd6, 0x48, 0x33, 0x6a, 0xd9, 0x03, 0xef, 0xf1, 0x40, 0xa9, 0x41, 0x8a, 0x11, 0xcf, 0x93,
+	0x88, 0x4b, 0xa9, 0x34, 0xd7, 0x89, 0x92, 0x54, 0x40, 0xbd, 0xcd, 0x0a, 0x2a, 0x7d, 0x52, 0x1c,
+	0x86, 0x1d, 0x78, 0x70, 0x90, 0x90, 0x3e, 0x40, 0x7e, 0x8c, 0x14, 0xe3, 0xd1, 0x08, 0x49, 0x33,
+	0x17, 0xee, 0x72, 0x21, 0x86, 0x48, 0xe4, 0x3a, 0x81, 0xd3, 0x5c, 0x8b, 0xcf, 0x5f, 0x19, 0x83,
+	0xdb, 0x92, 0x67, 0xe8, 0xae, 0x98, 0xb2, 0x79, 0x0e, 0x5f, 0x80, 0x3b, 0xa3, 0xd8, 0xe7, 0x52,
+	0xa4, 0x28, 0x2e, 0xc9, 0x14, 0xbe, 0x82, 0x47, 0x15, 0x5d, 0x94, 0x2b, 0x49, 0xc8, 0x76, 0xa0,
+	0x9e, 0x9a, 0x8a, 0xeb, 0x04, 0xb7, 0x9a, 0x8d, 0x36, 0x6b, 0xcd, 0x8d, 0xdb, 0x32, 0xe0, 0xd8,
+	0x22, 0xc2, 0x08, 0xd6, 0x67, 0x44, 0x87, 0x7a, 0x24, 0x50, 0xea, 0x4b, 0x28, 0xef, 0xc3, 0x46,
+	0xb9, 0xc1, 0x8a, 0xee, 0xc2, 0x2a, 0xd9, 0x9a, 0x95, 0xdd, 0x28, 0xc9, 0xda, 0x86, 0xf8, 0x2f,
+	0x2a, 0x7c, 0x09, 0x6c, 0x7e, 0x79, 0xd7, 0x30, 0xdf, 0x05, 0x66, 0x0a, 0x87, 0x9a, 0xeb, 0xd1,
+	0x35, 0xf7, 0x2f, 0x60, 0xbd, 0xc4, 0x61, 0x6d, 0x6c, 0xc2, 0x1a, 0x25, 0x03, 0x89, 0xe2, 0x5d,
+	0x6f, 0x6c, 0x69, 0x56, 0x8b, 0x42, 0x77, 0xcc, 0x76, 0xa1, 0x4e, 0x06, 0x6e, 0x98, 0xee, 0xb7,
+	0xdd, 0x45, 0x8f, 0x96, 0xce, 0xe2, 0xda, 0xdf, 0xea, 0x70, 0xe7, 0xcd, 0x2c, 0x80, 0xec, 0x53,
+	0x11, 0x99, 0xd7, 0x28, 0x45, 0x22, 0x07, 0xc5, 0xf0, 0xcc, 0x2f, 0x13, 0x5c, 0x8c, 0x94, 0xb7,
+	0xb5, 0xf4, 0xbc, 0xb0, 0x1b, 0x36, 0x3f, 0xff, 0xf8, 0xfd, 0x75, 0x25, 0x64, 0x41, 0x54, 0x11,
+	0x57, 0x2e, 0xb2, 0x44, 0x9e, 0xef, 0xe0, 0x23, 0xdc, 0x9b, 0xff, 0x7e, 0x2c, 0x58, 0xa0, 0xbe,
+	0x90, 0x05, 0xef, 0xc9, 0x3f, 0x10, 0x57, 0x96, 0xff, 0xe2, 0x14, 0xf3, 0x97, 0x92, 0xcb, 0xb6,
+	0x17, 0x24, 0xaa, 0xfe, 0x07, 0xef, 0xd9, 0xff, 0x60, 0x57, 0xb6, 0x73, 0xea, 0xc0, 0xc3, 0x19,
+	0x4f, 0x27, 0x4d, 0x3b, 0xfd, 0x3e, 0xe6, 0xfa, 0x46, 0x59, 0x8a, 0xf1, 0x3d, 0xf6, 0x6f, 0x80,
+	0xa5, 0x0f, 0xd0, 0x98, 0x0b, 0x35, 0xdb, 0x5a, 0x1a, 0x77, 0xeb, 0x20, 0x58, 0x0e, 0xb0, 0xda,
+	0x3b, 0x46, 0xfb, 0x29, 0x0b, 0xab, 0xb4, 0xed, 0x0d, 0x61, 0xd5, 0xbb, 0xdb, 0xdf, 0x27, 0xbe,
+	0x73, 0x36, 0xf1, 0x9d, 0x5f, 0x13, 0xdf, 0x39, 0x9d, 0xfa, 0xb5, 0xb3, 0xa9, 0x5f, 0xfb, 0x39,
+	0xf5, 0x6b, 0x6f, 0x1b, 0x27, 0xa6, 0x4f, 0x8f, 0x73, 0xa4, 0x5e, 0xdd, 0x5c, 0xc9, 0xcf, 0xff,
+	0x04, 0x00, 0x00, 0xff, 0xff, 0x24, 0x1f, 0xa7, 0x09, 0xfc, 0x05, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -332,7 +470,11 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
 	//shows the list of leaves for admin
-	ListLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error)
+	ListPendingLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error)
+	ListStudents(ctx context.Context, in *ListStudentsRequest, opts ...grpc.CallOption) (*ListStudentsResponse, error)
+	ListHandledLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error)
+	ListAllAcceptedLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error)
+	ListAllRejectedLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error)
 	// show the status of the leave request for a student
 	LeaveStatus(ctx context.Context, in *LeaveStatusRequest, opts ...grpc.CallOption) (*LeaveStatusResponse, error)
 }
@@ -345,9 +487,45 @@ func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 	return &queryClient{cc}
 }
 
-func (c *queryClient) ListLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error) {
+func (c *queryClient) ListPendingLeaves(ctx context.Context, in *ListLeavesRequest, opts ...grpc.CallOption) (*ListLeavesResponse, error) {
 	out := new(ListLeavesResponse)
-	err := c.cc.Invoke(ctx, "/cosmos.lms.v1beta1.Query/ListLeaves", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListPendingLeaves", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListStudents(ctx context.Context, in *ListStudentsRequest, opts ...grpc.CallOption) (*ListStudentsResponse, error) {
+	out := new(ListStudentsResponse)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListStudents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListHandledLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error) {
+	out := new(ListHandledLeavesResponse)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListHandledLeaves", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListAllAcceptedLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error) {
+	out := new(ListHandledLeavesResponse)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListAllAcceptedLeaves", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListAllRejectedLeaves(ctx context.Context, in *ListHandledLeavesRequest, opts ...grpc.CallOption) (*ListHandledLeavesResponse, error) {
+	out := new(ListHandledLeavesResponse)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/ListAllRejectedLeaves", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -356,7 +534,7 @@ func (c *queryClient) ListLeaves(ctx context.Context, in *ListLeavesRequest, opt
 
 func (c *queryClient) LeaveStatus(ctx context.Context, in *LeaveStatusRequest, opts ...grpc.CallOption) (*LeaveStatusResponse, error) {
 	out := new(LeaveStatusResponse)
-	err := c.cc.Invoke(ctx, "/cosmos.lms.v1beta1.Query/LeaveStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/lms.v1beta1.Query/LeaveStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -366,7 +544,11 @@ func (c *queryClient) LeaveStatus(ctx context.Context, in *LeaveStatusRequest, o
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	//shows the list of leaves for admin
-	ListLeaves(context.Context, *ListLeavesRequest) (*ListLeavesResponse, error)
+	ListPendingLeaves(context.Context, *ListLeavesRequest) (*ListLeavesResponse, error)
+	ListStudents(context.Context, *ListStudentsRequest) (*ListStudentsResponse, error)
+	ListHandledLeaves(context.Context, *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error)
+	ListAllAcceptedLeaves(context.Context, *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error)
+	ListAllRejectedLeaves(context.Context, *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error)
 	// show the status of the leave request for a student
 	LeaveStatus(context.Context, *LeaveStatusRequest) (*LeaveStatusResponse, error)
 }
@@ -375,8 +557,20 @@ type QueryServer interface {
 type UnimplementedQueryServer struct {
 }
 
-func (*UnimplementedQueryServer) ListLeaves(ctx context.Context, req *ListLeavesRequest) (*ListLeavesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListLeaves not implemented")
+func (*UnimplementedQueryServer) ListPendingLeaves(ctx context.Context, req *ListLeavesRequest) (*ListLeavesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPendingLeaves not implemented")
+}
+func (*UnimplementedQueryServer) ListStudents(ctx context.Context, req *ListStudentsRequest) (*ListStudentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListStudents not implemented")
+}
+func (*UnimplementedQueryServer) ListHandledLeaves(ctx context.Context, req *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListHandledLeaves not implemented")
+}
+func (*UnimplementedQueryServer) ListAllAcceptedLeaves(ctx context.Context, req *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllAcceptedLeaves not implemented")
+}
+func (*UnimplementedQueryServer) ListAllRejectedLeaves(ctx context.Context, req *ListHandledLeavesRequest) (*ListHandledLeavesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllRejectedLeaves not implemented")
 }
 func (*UnimplementedQueryServer) LeaveStatus(ctx context.Context, req *LeaveStatusRequest) (*LeaveStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LeaveStatus not implemented")
@@ -386,20 +580,92 @@ func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
 	s.RegisterService(&_Query_serviceDesc, srv)
 }
 
-func _Query_ListLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Query_ListPendingLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListLeavesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).ListLeaves(ctx, in)
+		return srv.(QueryServer).ListPendingLeaves(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cosmos.lms.v1beta1.Query/ListLeaves",
+		FullMethod: "/lms.v1beta1.Query/ListPendingLeaves",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ListLeaves(ctx, req.(*ListLeavesRequest))
+		return srv.(QueryServer).ListPendingLeaves(ctx, req.(*ListLeavesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListStudents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStudentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListStudents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/lms.v1beta1.Query/ListStudents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListStudents(ctx, req.(*ListStudentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListHandledLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHandledLeavesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListHandledLeaves(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/lms.v1beta1.Query/ListHandledLeaves",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListHandledLeaves(ctx, req.(*ListHandledLeavesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListAllAcceptedLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHandledLeavesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListAllAcceptedLeaves(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/lms.v1beta1.Query/ListAllAcceptedLeaves",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListAllAcceptedLeaves(ctx, req.(*ListHandledLeavesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListAllRejectedLeaves_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListHandledLeavesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListAllRejectedLeaves(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/lms.v1beta1.Query/ListAllRejectedLeaves",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListAllRejectedLeaves(ctx, req.(*ListHandledLeavesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -414,7 +680,7 @@ func _Query_LeaveStatus_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cosmos.lms.v1beta1.Query/LeaveStatus",
+		FullMethod: "/lms.v1beta1.Query/LeaveStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).LeaveStatus(ctx, req.(*LeaveStatusRequest))
@@ -423,12 +689,28 @@ func _Query_LeaveStatus_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 var _Query_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "cosmos.lms.v1beta1.Query",
+	ServiceName: "lms.v1beta1.Query",
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListLeaves",
-			Handler:    _Query_ListLeaves_Handler,
+			MethodName: "ListPendingLeaves",
+			Handler:    _Query_ListPendingLeaves_Handler,
+		},
+		{
+			MethodName: "ListStudents",
+			Handler:    _Query_ListStudents_Handler,
+		},
+		{
+			MethodName: "ListHandledLeaves",
+			Handler:    _Query_ListHandledLeaves_Handler,
+		},
+		{
+			MethodName: "ListAllAcceptedLeaves",
+			Handler:    _Query_ListAllAcceptedLeaves_Handler,
+		},
+		{
+			MethodName: "ListAllRejectedLeaves",
+			Handler:    _Query_ListAllRejectedLeaves_Handler,
 		},
 		{
 			MethodName: "LeaveStatus",
@@ -472,6 +754,140 @@ func (m *ListLeavesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListHandledLeavesRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListHandledLeavesRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListHandledLeavesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListHandledLeavesResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListHandledLeavesResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListHandledLeavesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Leaves) > 0 {
+		for iNdEx := len(m.Leaves) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Leaves[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListStudentsRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListStudentsRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListStudentsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListStudentsResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListStudentsResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListStudentsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Students) > 0 {
+		for iNdEx := len(m.Students) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Students[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
 	}
 	return len(dAtA) - i, nil
 }
@@ -570,62 +986,15 @@ func (m *LeaveStatusResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.Leave != nil {
-		{
-			size, err := m.Leave.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
+	if m.Status != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.Status))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x10
 	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Leave) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Leave) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Leave) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Status {
-		i--
-		if m.Status {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i--
-		dAtA[i] = 0x28
-	}
-	if len(m.Reason) > 0 {
-		i -= len(m.Reason)
-		copy(dAtA[i:], m.Reason)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.Reason)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Address) > 0 {
-		i -= len(m.Address)
-		copy(dAtA[i:], m.Address)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
+	if len(m.SignedBy) > 0 {
+		i -= len(m.SignedBy)
+		copy(dAtA[i:], m.SignedBy)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.SignedBy)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -656,6 +1025,62 @@ func (m *ListLeavesRequest) Size() (n int) {
 	l = len(m.Name)
 	if l > 0 {
 		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *ListHandledLeavesRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *ListHandledLeavesResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Leaves) > 0 {
+		for _, e := range m.Leaves {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *ListStudentsRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *ListStudentsResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Students) > 0 {
+		for _, e := range m.Students {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
 	}
 	return n
 }
@@ -698,29 +1123,12 @@ func (m *LeaveStatusResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.Leave != nil {
-		l = m.Leave.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *Leave) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Address)
+	l = len(m.SignedBy)
 	if l > 0 {
 		n += 1 + l + sovQuery(uint64(l))
 	}
-	l = len(m.Reason)
-	if l > 0 {
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	if m.Status {
-		n += 2
+	if m.Status != 0 {
+		n += 1 + sovQuery(uint64(m.Status))
 	}
 	return n
 }
@@ -823,6 +1231,338 @@ func (m *ListLeavesRequest) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListHandledLeavesRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListHandledLeavesRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListHandledLeavesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListHandledLeavesResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListHandledLeavesResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListHandledLeavesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Leaves", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Leaves = append(m.Leaves, &Leave{})
+			if err := m.Leaves[len(m.Leaves)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListStudentsRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListStudentsRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListStudentsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListStudentsResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListStudentsResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListStudentsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Students", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Students = append(m.Students, &Student{})
+			if err := m.Students[len(m.Students)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1074,93 +1814,7 @@ func (m *LeaveStatusResponse) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Leave", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Leave == nil {
-				m.Leave = &Leave{}
-			}
-			if err := m.Leave.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Leave) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Leave: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Leave: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field SignedBy", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1188,45 +1842,13 @@ func (m *Leave) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Address = string(dAtA[iNdEx:postIndex])
+			m.SignedBy = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Reason", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Reason = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
 			}
-			var v int
+			m.Status = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowQuery
@@ -1236,12 +1858,11 @@ func (m *Leave) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= int(b&0x7F) << shift
+				m.Status |= LeaveStatus(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.Status = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := skipQuery(dAtA[iNdEx:])

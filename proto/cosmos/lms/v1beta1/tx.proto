@@ -1,20 +1,20 @@
 syntax="proto3";
-package cosmos.lms.v1beta1;
+package lms.v1beta1;
 option go_package="x/lms/types";
 import "google/protobuf/timestamp.proto";
 import "gogoproto/gogo.proto";
 service Msg {
     // RegisterAdmin adds a new admin
-    rpc RegisterAdmin(MsgRegisterAdminRequest) returns (MsgRegisterAdminResponse) {};
+    rpc MsgRegisterAdmin(MsgRegisterAdminRequest) returns (MsgRegisterAdminResponse) {};
     
     // AddStudent adds new student
-    rpc AddStudent(MsgAddStudentRequest) returns (MsgAddStudentResponse) {};
+    rpc MsgAddStudent(MsgAddStudentRequest) returns (MsgAddStudentResponse) {};
     
     // ApplyLeave request a new leave
-    rpc ApplyLeave(MsgApplyLeaveRequest) returns (MsgApplyLeaveResponse) {};
+    rpc MsgApplyLeave(MsgApplyLeaveRequest) returns (MsgApplyLeaveResponse) {};
     
     // AcceptLeave accept or reject a leave
-    rpc AcceptLeave(MsgAcceptLeaveRequest) returns (MsgAcceptLeaveResponse) {};
+    rpc MsgAcceptLeave(MsgAcceptLeaveRequest) returns (MsgAcceptLeaveResponse) {};
 }
 
 message MsgRegisterAdminRequest {
@@ -23,6 +23,8 @@ message MsgRegisterAdminRequest {
     
     // name is the admin name
     string name = 2;
+
+    string signerAddress = 3;
 }
 
 message MsgRegisterAdminResponse{}
@@ -33,19 +35,17 @@ message MsgAddStudentRequest {
     
     // students is the list of Student.
     repeated Student students = 2;
+
+    string signerAddress = 3;
 }
 
 message MsgAddStudentResponse{}
 
 message MsgApplyLeaveRequest {
     
-    string address = 1;
-    
-    string reason = 2;
-    
-    google.protobuf.Timestamp from = 3 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
-     
-    google.protobuf.Timestamp to = 4 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
+    Leave leave = 1;
+
+    string signerAddress = 2;
 }
 
 message MsgApplyLeaveResponse {
@@ -53,7 +53,7 @@ message MsgApplyLeaveResponse {
 }
 
 enum LeaveStatus {
-    STATUS_UNDEFINED = 0;
+    STATUS_PENDING = 0;
     
     STATUS_ACCEPTED = 1;
     
@@ -64,15 +64,19 @@ message MsgAcceptLeaveRequest {
 
     string admin = 1;
     
-    uint64 leave_id = 2;
+    // using it as student id, will accept his latest leave request if any
+    string student = 2;
+
 
     LeaveStatus status = 3;
+
+    string signerAddress = 4;
+    
 }
 
 message MsgAcceptLeaveResponse {
 
 }
-
 message Student {
     // address is the account address of the student.
     string address = 1;
@@ -82,4 +86,20 @@ message Student {
     
     // id is a unique student id.
     string id = 3;
+}
+
+message Leave {
+    
+    string address = 1;
+    
+    string reason = 2;
+    
+    google.protobuf.Timestamp from = 3 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
+     
+    google.protobuf.Timestamp to = 4 [(gogoproto.stdtime)=true,(gogoproto.nullable)=true ];
+
+    string handled_by = 5;
+
+    LeaveStatus status = 6; 
+
 }
